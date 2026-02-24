@@ -1,5 +1,6 @@
 loadTxt=document.querySelector('.loadtxt')
 bg=document.querySelector('.bg')
+load=0
 
-loadtxt.innerText="hi"
-bg.style.opacity="0.9"
+loadtxt.innerText=`${load}%`
+bg.style.filter=""
