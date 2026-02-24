@@ -1,0 +1,56 @@
+*{
+    box-sizing: border-box;
+}
+
+
+
+
+body {
+    background-color: rgb(r1 ,g1 ,b1 );
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    justify-content: center;
+    margin: 0;
+}
+
+
+.search{
+    position: relative;
+    height: 50px;
+}
+
+
+.input{
+    background: midnightblue;
+    border: 2, midnightblue;
+    font-size: 18px;
+    padding: 15px;
+    height: 50px;
+    width: 50px;
+}
+
+
+.btn{
+    background: white;
+    border: 0;
+    cursor: pointer;
+    font-size: 24;
+    height: 50px;
+    width: 50px;
+}
+
+
+.input:focus {
+outline: none;
+}
+
+
+.search.active .input {
+    width: 200px;
+    background: lightblue;
+
+}
+.btn.active .input {
+    transform: ;
+}
