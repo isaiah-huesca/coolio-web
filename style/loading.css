@@ -10,10 +10,14 @@ body{
     justify: center;
     margin: 0;
 }
+.loadtxt{
+    fontsize: 50px;
+    opacity: .5;
+}
 .bg{
     height: 100vh;
     width: 100vw;
-    background-image: ;
+    background-image: url('../mount.jpg');
     background-repeat: no-repeat;
     position: absolute;
     z-index: -1;
