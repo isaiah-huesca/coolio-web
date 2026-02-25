@@ -1,9 +1,9 @@
     box = document.querySelector("div")
     delta = 0
     syn = .6
-    rot= 0
+    rot= .12
     setInterval(function() {
-        syn= Math.random(0,1)
+        syn = Math.random(0,1)
         if(syn <.5){
             delta =-(delta)
         }
@@ -15,5 +15,10 @@
         }
         delta += Math.random(-5, 5)
         box.style.height = `${delta}px`
-        rot += 
+        syn= Math.random(0,1)
+        rot+= (Math.random(0,1)/10)
+        if(syn >.5){
+            rot -= (rot)
+        }
+        box.style.transform=`rotate(${rot}turn)`
     }, 0);
