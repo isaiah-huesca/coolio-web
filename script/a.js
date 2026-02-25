@@ -1,5 +1,5 @@
+    box = document.querySelector("div")
 
 while (1) {
-    box = document.querySelector("div")
-    box.width += math.randomInt(-1,1)
+    box.width += Math.random(-1,1)
 }
