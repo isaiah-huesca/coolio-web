@@ -15,4 +15,5 @@ div {
     height: 50px;
     width: 50px;
     transform-origin: rotate(.12turn);
+    transition: all ease .1s;
 }
