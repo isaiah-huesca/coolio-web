@@ -1,9 +1,19 @@
     box = document.querySelector("div")
     delta = 0
-
+    syn = .6
+    rot= 0
     setInterval(function() {
-        delta += Math.random(-1, 1)
+        syn= Math.random(0,1)
+        if(syn <.5){
+            delta =-(delta)
+        }
+        delta += Math.random(-5, 5)
         box.style.width = `${delta}px`
-        delta += Math.random(-1, 1)
+        syn= Math.random(0,1)
+        if(syn >.5){
+            delta =-(delta)
+        }
+        delta += Math.random(-5, 5)
         box.style.height = `${delta}px`
-    }, 10);
+        rot += 
+    }, 0);
