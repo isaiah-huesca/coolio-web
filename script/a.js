@@ -7,16 +7,16 @@
         if(syn <.5){
             delta =-(delta)
         }
-        delta += Math.random(-5, 5)
+        delta += Math.random(-10, 10)
         box.style.width = `${delta}px`
         syn= Math.random(0,1)
         if(syn >.5){
             delta =-(delta)
         }
-        delta += Math.random(-5, 5)
+        delta += Math.random(-10, 10)
         box.style.height = `${delta}px`
         syn= Math.random(0,1)
-        rot+= (Math.random(0,1)/10)
+        rot+= (Math.random(0,1)/5)
         if(syn >.5){
             rot -= (rot)
         }
