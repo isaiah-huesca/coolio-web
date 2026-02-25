@@ -2,5 +2,5 @@
 
 
     setInterval(function() {
-        box.width += Math.random(-5, 5)
+        box.style.width += Math.random(-5, 5)
     }, 100);
