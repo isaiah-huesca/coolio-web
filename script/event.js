@@ -21,7 +21,7 @@ clbx.addEventListener('click', () => {
 })
 
 spbx.addEventListener('click', () => {
-    spbx.classList.toggle('start')
+    spbx.classList.add("start")
 })
 
 x = 0
@@ -61,21 +61,33 @@ document.addEventListener('keydown', (event) => {
 hbx.addEventListener('mouseenter', () => {
     hover = 1
     console.log(true)
-        if (hover == 1) {
-            console.log(true)
-            cr = Math.random() * 256
-            cg = Math.random() * 256
-            cb = Math.random() * 256
-            console.log("red ")
-            console.log(cr)
-            console.log("green ")
-            console.log(cg)
-            console.log("blue ")
-            console.log(cb)
-            hbx.style.backgroundColor = `rgb(${cr} ${cg} ${cb})`
-        }
+    if (hover == 1) {
+        console.log(true)
+        cr = Math.random() * 256
+        cg = Math.random() * 256
+        cb = Math.random() * 256
+        console.log("red ")
+        console.log(cr)
+        console.log("green ")
+        console.log(cg)
+        console.log("blue ")
+        console.log(cb)
+        hbx.style.backgroundColor = `rgb(${cr} ${cg} ${cb})`
+    }
+    x = 0
+    y = 0
+    val = Math.random()
+    if (val > .5) {
+        x += (Math.random() * 50 + 50)
+        y += (Math.random() * 50 + 50)
+    } else {
+        x -= (Math.random() * 50 + 50)
+        y -= (Math.random() * 50 + 50)
+    }
 
-        
+    hbx.style.transform = `translate(${x}px,${y}px))`
+
+
 
 })
 hbx.addEventListener('mouseleave', () => {
@@ -91,3 +103,6 @@ dblbx.addEventListener('dblclick', () => {
         window.close("event.html")
     }, 200)
 })
+
+
+
