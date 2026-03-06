@@ -49,6 +49,7 @@ body {
 
 .spin {
     position: absolute;
+    transform-origin: ;
     animation: spin 5s infinite ease-out;
 }
 
