@@ -48,21 +48,19 @@ document.addEventListener('keydown', (event) => {
         rot += 90
 
     }
-    org1 = (Math.random() * 100)
-    org1 = (Math.random() * 100)
 
+    org1 = (Math.random() * 100)
+    org2 = (Math.random() * 100)
     sec = (Math.random() * 2 + .05)
-    kbx.style.transform.origin = `${org}`
+    kbx.style.transformOrigin = `${org1}% ${org2}%`
     kbx.style.transition = `transform ${sec}s `
     kbx.style.transform = `translate(${x}px,${y}px) rotate(${rot}deg)`
     console.log(rot, sec)
-
 })
 
 hbx.addEventListener('mouseenter', () => {
     hover = 1
     console.log(true)
-    setInterval(function() {
         if (hover == 1) {
             console.log(true)
             cr = Math.random() * 256
@@ -76,7 +74,7 @@ hbx.addEventListener('mouseenter', () => {
             console.log(cb)
             hbx.style.backgroundColor = `rgb(${cr} ${cg} ${cb})`
         }
-    }, 100)
+
 
 })
 hbx.addEventListener('mouseleave', () => {
