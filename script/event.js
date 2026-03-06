@@ -50,7 +50,7 @@ document.addEventListener('keydown', (event) => {
     }
     sec = Math.floor(Math.random() * 10 + 1)
     kbx.style.transform = `translate(${x}px,${y}px )`
-    kbx.style.transform = `rotateY(${rot}deg ${sec}s ease)`
+    kbx.style.transform = `rotate(${rot}deg)`
     console.log(rot, sec)
 
 })
