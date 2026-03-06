@@ -75,6 +75,7 @@ hbx.addEventListener('mouseenter', () => {
             hbx.style.backgroundColor = `rgb(${cr} ${cg} ${cb})`
         }
 
+        
 
 })
 hbx.addEventListener('mouseleave', () => {
