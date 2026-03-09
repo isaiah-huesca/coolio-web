@@ -74,18 +74,18 @@ hbx.addEventListener('mouseenter', () => {
         console.log(cb)
         hbx.style.backgroundColor = `rgb(${cr} ${cg} ${cb})`
     }
-    x = 0
-    y = 0
+    axsx = 0
+    axsy = 0
     val = Math.random()
     if (val > .5) {
-        x += (Math.random() * 50 + 50)
-        y += (Math.random() * 50 + 50)
+        axsx += (Math.random() * 50 + 50)
+        axsy += (Math.random() * 50 + 50)
     } else {
-        x -= (Math.random() * 50 + 50)
-        y -= (Math.random() * 50 + 50)
+        axsx -= (Math.random() * 50 + 50)
+        axsy -= (Math.random() * 50 + 50)
     }
 
-    hbx.style.transform = `translate(${x}px,${y}px))`
+    hbx.style.transform = `translate(${x}px,${y}px)`
 
 
 
@@ -103,6 +103,3 @@ dblbx.addEventListener('dblclick', () => {
         window.close("event.html")
     }, 200)
 })
-
-
-
