@@ -85,7 +85,7 @@ hbx.addEventListener('mouseenter', () => {
         axsy -= (Math.random() * 50 + 50)
     }
 
-    hbx.style.transform = `translate(${x}px,${y}px)`
+    hbx.style.transform = `translate(${axsx}px,${axsy}px)`
 
 
 
