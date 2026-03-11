@@ -97,9 +97,6 @@ hbx.addEventListener('mouseleave', () => {
 
 dblbx.addEventListener('dblclick', () => {
     setInterval(function() {
-        window.open("why.html")
-    }, 100)
-    setInterval(function() {
         window.close("event.html")
     }, 200)
 })
