@@ -1,6 +1,6 @@
 const player = 0
 const bot = 0
-const ball = 0
+const ball = document.querySelector(".ball")
 x = 0
 y = 0
 
