@@ -31,6 +31,7 @@ function updateGame() {
     else{
         console.log("N/A")
     }
+    console.log(x)
     // Call this function within window.requestAnimationFrame or a setInterval
 }
 
