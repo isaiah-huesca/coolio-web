@@ -4,7 +4,7 @@ const ball = 0
 x = 0
 y = 0
 
-let intervalID = setInterval(updateGame, 100);
+let intervalID = setInterval(updateGame, 75);
 
 const keysPressed = {};
 document.addEventListener('keydown', (event) => {
