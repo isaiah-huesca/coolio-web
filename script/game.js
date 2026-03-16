@@ -4,6 +4,7 @@ const ball = 0
 x = 0
 y = 0
 
+let intervalID = setInterval(updateGame, 100);
 
 const keysPressed = {};
 document.addEventListener('keydown', (event) => {
@@ -21,9 +22,11 @@ document.addEventListener('keyup', (event) => {
 function updateGame() {
     if (keysPressed['ArrowLeft']) {
         console.log("left")
+        x-=10
     }
     else if (keysPressed['ArrowRight']) {
         console.log("right")
+        x+=10
     }
     else{
         console.log("N/A")
@@ -31,4 +34,3 @@ function updateGame() {
     // Call this function within window.requestAnimationFrame or a setInterval
 }
 
-let intervalID = setInterval(updateGame, 100);
