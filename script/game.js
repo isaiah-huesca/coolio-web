@@ -6,7 +6,6 @@ y = 0
 
 
 const keysPressed = {};
-
 document.addEventListener('keydown', (event) => {
   // Use event.code to track physical keys consistently
   if (!event.repeat) { // Ignore repeated keydown events when key is held down
@@ -19,13 +18,14 @@ document.addEventListener('keyup', (event) => {
 });
 
 // In a game loop or animation frame:
-let intervalID = setInterval(sayHello, 1000);
 function updateGame() {
   if (keysPressed['ArrowLeft']) {
-
+    console.log("left")
   }
   if (keysPressed['ArrowRight']) {
-    // Move character right
+    console.log("right")
   }
   // Call this function within window.requestAnimationFrame or a setInterval
 }
+
+let intervalID = setInterval(updateGame, 50);
