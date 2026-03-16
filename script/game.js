@@ -21,7 +21,7 @@ document.addEventListener('keyup', (event) => {
 // In a game loop or animation frame:
 function updateGame() {
   if (keysPressed['ArrowLeft']) {
-    // Move character left
+    
   }
   if (keysPressed['ArrowRight']) {
     // Move character right
