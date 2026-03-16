@@ -19,9 +19,10 @@ document.addEventListener('keyup', (event) => {
 });
 
 // In a game loop or animation frame:
+let intervalID = setInterval(sayHello, 1000);
 function updateGame() {
   if (keysPressed['ArrowLeft']) {
-    
+
   }
   if (keysPressed['ArrowRight']) {
     // Move character right
