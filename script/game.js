@@ -3,7 +3,7 @@ const bot = 0
 const ball = document.querySelector(".ball")
 x = 0
 y = 0
-
+a = x
 let intervalID = setInterval(updateGame, 75);
 
 const keysPressed = {};
@@ -20,18 +20,20 @@ document.addEventListener('keyup', (event) => {
 
 // In a game loop or animation frame:
 function updateGame() {
+    a = x
     if (keysPressed['ArrowLeft']) {
         console.log("left")
-        x-=10
+        x -= (a + 1)
     }
     else if (keysPressed['ArrowRight']) {
         console.log("right")
-        x+=10
+        x += (a + 1)
     }
-    else{
+    else {
+        a = 1
         console.log("N/A")
     }
     console.log(x)
-    // Call this function within window.requestAnimationFrame or a setInterval
+    ball.style.transform = `translate(${x}px)`
 }
 
