@@ -27,25 +27,34 @@ function updateInput() {
         console.log("left", x)
         x -= (a + 1)
         a++
-        clamp(a, -50, 50)
+        clamp(a, 0, 50)
     } else if (keysPressed['ArrowRight']) {
         console.log("right", x)
         x += (a + 1)
         a++
-        clamp(a, -50, 50)
+        clamp(a, 0, 50)
     } else {
         if (keysPressed['ArrowLeft'] == 0) {
             for (let i = a; i > 1; i--) {
                 a--
+                clamp(a, 0, 50)
+
                 x -= (a + 1)
-            }
-        } else if (keysPressed['ArrowRight'] == 0) {
-            for (let i = a; i > 1; i--) {
-                a--
-                x += (a - 1)
+                console.log("N/A", x)
+
             }
         }
+        if (keysPressed['ArrowRight'] == 0) {
+            for (let i = a; i > 1; i--) {
 
+                a--
+                clamp(a, 0, 50)
+
+                x += (a - 1)
+                console.log("N/A", x)
+
+            }
+        }
         console.log("N/A", x)
     }
 }
