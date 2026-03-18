@@ -34,14 +34,14 @@ function updateInput() {
         a++
         clamp(a, -50, 50)
     } else {
-        if (!keysPressed['ArrowLeft']) {
+        if (keysPressed['ArrowLeft'] == 0) {
             for (let i = a; i > 1; i--) {
                 a--
-                x += (a + 1)
+                x -= (a + 1)
             }
-        } else if (!keysPressed['ArrowRight']) {
+        } else if (keysPressed['ArrowRight'] == 0) {
             for (let i = a; i > 1; i--) {
-                a--
+                a++
                 x -= (a + 1)
             }
         }
