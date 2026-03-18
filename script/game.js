@@ -34,8 +34,10 @@ function updateInput() {
         a++
         clamp(a, 0, 50)
     } else {
-        if (keysPressed['ArrowLeft'] == 0) {
+        if (keysPressed['ArrowRight'] == 0) {
+            if (keysPressed['ArrowLeft'] == 0) {
             for (let i = a; i > 1; i--) {
+
                 a--
                 clamp(a, 0, 50)
 
@@ -43,10 +45,9 @@ function updateInput() {
                 console.log("N/A", x)
 
             }
+            break;
         }
-        if (keysPressed['ArrowRight'] == 0) {
             for (let i = a; i > 1; i--) {
-
                 a--
                 clamp(a, 0, 50)
 
