@@ -27,23 +27,22 @@ function updateInput() {
         console.log("left")
         x -= (a + 1)
         a++
-        clamp(a, 0, 50)
+        clamp(a, -50, 50)
     } else if (keysPressed['ArrowRight']) {
         console.log("right")
         x += (a + 1)
         a++
-        clamp(a, 0, 50)
-
+        clamp(a, -50, 50)
     } else {
         if (!keysPressed['ArrowLeft']) {
             for (let i = a; i > 1; i--) {
                 a--
                 x += (a + 1)
             }
-        } else {
+        } else if (!keysPressed['ArrowRight']) {
             for (let i = a; i > 1; i--) {
                 a++
-                x += (a + 1)
+                x -= (a + 1)
             }
         }
 
