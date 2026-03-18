@@ -35,22 +35,23 @@ function updateInput() {
         clamp(a, 0, 50)
     } else {
         if (keysPressed['ArrowRight'] == 0) {
-            if (keysPressed['ArrowLeft'] == 0) {
+            
+            for (let i = a; i > 1; i--) {
+                a--
+                clamp(a, 0, 50)
+
+                x += (a - 1)
+                console.log("N/A", x)
+
+            }
+        }
+        if (keysPressed['ArrowLeft'] == 0) {
             for (let i = a; i > 1; i--) {
 
                 a--
                 clamp(a, 0, 50)
 
                 x -= (a + 1)
-                console.log("N/A", x)
-
-            }
-        }
-            for (let i = a; i > 1; i--) {
-                a--
-                clamp(a, 0, 50)
-
-                x += (a - 1)
                 console.log("N/A", x)
 
             }
