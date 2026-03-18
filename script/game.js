@@ -45,7 +45,6 @@ function updateInput() {
                 console.log("N/A", x)
 
             }
-            break;
         }
             for (let i = a; i > 1; i--) {
                 a--
