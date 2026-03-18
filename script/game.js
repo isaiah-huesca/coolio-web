@@ -24,12 +24,12 @@ document.addEventListener('keyup', (event) => {
 // In a game loop or animation frame:
 function updateInput() {
     if (keysPressed['ArrowLeft']) {
-        console.log("left")
+        console.log("left", x)
         x -= (a + 1)
         a++
         clamp(a, -50, 50)
     } else if (keysPressed['ArrowRight']) {
-        console.log("right")
+        console.log("right", x)
         x += (a + 1)
         a++
         clamp(a, -50, 50)
@@ -41,14 +41,13 @@ function updateInput() {
             }
         } else if (keysPressed['ArrowRight'] == 0) {
             for (let i = a; i > 1; i--) {
-                a++
-                x -= (a + 1)
+                a--
+                x += (a - 1)
             }
         }
 
-        console.log("N/A")
+        console.log("N/A", x)
     }
-    console.log(x)
 }
 
 function updateVisual() {
