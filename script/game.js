@@ -35,10 +35,18 @@ function updateInput() {
         clamp(a, 0, 50)
 
     } else {
-        for (let i = a; i > 1; i--) {
-            a--
-            x += (a + 1)
+        if (!keysPressed['ArrowLeft']) {
+            for (let i = a; i > 1; i--) {
+                a--
+                x += (a + 1)
+            }
+        } else {
+            for (let i = a; i > 1; i--) {
+                a++
+                x += (a + 1)
+            }
         }
+
         console.log("N/A")
     }
     console.log(x)
