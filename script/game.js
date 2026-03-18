@@ -3,8 +3,11 @@ const bot = 0
 const ball = document.querySelector(".ball")
 x = 0
 y = 0
-a = x
-let intervalID = setInterval(updateGame, 75);
+a = 0
+t = 1
+
+setInterval(updateInput, 60);
+setInterval(updateVisual, 60);
 
 const keysPressed = {};
 document.addEventListener('keydown', (event) => {
@@ -19,21 +22,33 @@ document.addEventListener('keyup', (event) => {
 });
 
 // In a game loop or animation frame:
-function updateGame() {
-    a = x
+function updateInput() {
     if (keysPressed['ArrowLeft']) {
         console.log("left")
         x -= (a + 1)
-    }
-    else if (keysPressed['ArrowRight']) {
+        a++
+        clamp(a, 0, 50)
+    } else if (keysPressed['ArrowRight']) {
         console.log("right")
         x += (a + 1)
-    }
-    else {
-        a = 1
+        a++
+        clamp(a, 0, 50)
+
+    } else {
+        for (let i = a; i > 1; i--) {
+            a--
+            x += (a + 1)
+        }
         console.log("N/A")
     }
     console.log(x)
+}
+
+function updateVisual() {
+    ball.style.transition = `transform ${1 / a}s ease-out`
     ball.style.transform = `translate(${x}px)`
 }
 
+function clamp(num, min, max) {
+    return Math.min(Math.max(num, min), max);
+}
