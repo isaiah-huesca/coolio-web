@@ -41,7 +41,7 @@ function updateInput() {
             }
         } else if (!keysPressed['ArrowRight']) {
             for (let i = a; i > 1; i--) {
-                a++
+                a--
                 x -= (a + 1)
             }
         }
