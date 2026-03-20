@@ -1,13 +1,14 @@
 const player = 0
 const bot = 0
 const ball = document.querySelector(".ball")
-x = 0
 y = 0
+x = 0
 a = 0
 t = 1
+c = 0
 
-setInterval(updateInput, 60);
-setInterval(updateVisual, 60);
+setInterval(updateInput, 50);
+setInterval(updateVisual, 50);
 
 const keysPressed = {};
 document.addEventListener('keydown', (event) => {
@@ -23,46 +24,47 @@ document.addEventListener('keyup', (event) => {
 
 // In a game loop or animation frame:
 function updateInput() {
-    if (keysPressed['ArrowLeft']) {
-        console.log("left", x)
-        x -= (a + 1)
+    if (keysPressed['ArrowUp']) {
+        console.log("up", y)
+        y -= (a + 1)
         a++
         clamp(a, 0, 50)
-    } else if (keysPressed['ArrowRight']) {
-        console.log("right", x)
-        x += (a + 1)
+        c = 1
+    } else if (keysPressed['ArrowDown']) {
+        console.log("down", y)
+        y += (a + 1)
         a++
         clamp(a, 0, 50)
+        c = 2
     } else {
-        if (keysPressed['ArrowRight'] == 0) {
-            
+        if (c == 2) {
             for (let i = a; i > 1; i--) {
                 a--
                 clamp(a, 0, 50)
 
-                x += (a - 1)
-                console.log("N/A", x)
-
+                y += (a - 1)
+                console.log("N/A", y)
             }
+            c = 0
         }
-        if (keysPressed['ArrowLeft'] == 0) {
+        if (c == 1) {
             for (let i = a; i > 1; i--) {
 
                 a--
                 clamp(a, 0, 50)
 
-                x -= (a + 1)
-                console.log("N/A", x)
-
+                y -= (a + 1)
+                console.log("N/A", y)
             }
+            c = 0
         }
-        console.log("N/A", x)
+        console.log("N/A", y)
     }
 }
 
 function updateVisual() {
     ball.style.transition = `transform ${1 / a}s ease-out`
-    ball.style.transform = `translate(${x}px)`
+    ball.style.transform = `translate(${x}px, ${y}px)`
 }
 
 function clamp(num, min, max) {
