@@ -9,6 +9,7 @@ t = 1
 c = 0
 
 setInterval(updateInputY, 50);
+setInterval(updateInputX, 50);
 
 const keysPressed = {};
 document.addEventListener('keydown', (event) => {
@@ -40,18 +41,17 @@ function updateInputY() {
         clamp(a_y, 0, 50)
         c = 2
     } else {
-        if (c == 2) {
-            for (let i = a_y; i > 1; i--) {
+        setInterval(function decelerationY() {
+            if (c == 2) {
+
                 a_y--
                 clamp(a_y, 0, 50)
 
                 y += (a_y - 1)
                 console.log("N/A", y)
-            }
-        }
-        if (c == 1) {
 
-            for (let i = a_y; i > 1; i--) {
+            } else if (c == 1) {
+
 
                 a_y--
                 clamp(a_y, 0, 50)
@@ -59,10 +59,8 @@ function updateInputY() {
                 y -= (a_y + 1)
                 console.log("N/A", y)
             }
-
-        }
-        c = 0
-        console.log("N/A", y)
+            c = 0
+        }, 50)
     }
 }
 
@@ -80,10 +78,29 @@ function updateInputX() {
         clamp(a_x, 0, 50)
         c = 4
     } else {
-        setInterval(deceleration(), 50)
+        setInterval(function decelerationX() {
+            if (c == 3) {
+
+                a_x--
+                clamp(a_x, 0, 50)
+
+                x += (a_x - 1)
+                console.log("left", x)
+
+            } else if (c == 4) {
+
+
+                a_x--
+                clamp(a_x, 0, 50)
+
+                x -= (a_x + 1)
+                console.log("right", x)
+            }
+            c = 0
+        }, 50)
 
         c = 0
-        console.log("N/A", y)
+        console.log("N/A", x)
     }
 }
 
@@ -94,31 +111,4 @@ function updateVisual() {
 
 function clamp(num, min, max) {
     return Math.min(Math.max(num, min), max);
-}
-
-function deceleration() {
-    if (c == 2) {
-
-        a_y--
-        clamp(a_y, 0, 50)
-
-        y += (a_y - 1)
-        console.log("N/A", y)
-
-    } else if (c == 1) {
-
-
-        a_y--
-        clamp(a_y, 0, 50)
-
-        y -= (a_y + 1)
-        console.log("N/A", y)
-
-
-    } else if (c == 3) {
-
-    } else if (c == 4) {
-
-    }
-    c = 0
 }
