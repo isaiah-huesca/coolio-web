@@ -80,24 +80,18 @@ function updateInputX() {
     } else {
         setInterval(function decelerationX() {
             if (c == 3) {
-
                 a_x--
                 clamp(a_x, 0, 50)
-
                 x += (a_x - 1)
                 console.log("left", x)
-
             } else if (c == 4) {
-
-
                 a_x--
                 clamp(a_x, 0, 50)
-
                 x -= (a_x + 1)
                 console.log("right", x)
             }
             c = 0
-        }, 50)
+        }, 40)
 
         c = 0
         console.log("N/A", x)
