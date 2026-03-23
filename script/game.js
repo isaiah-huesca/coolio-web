@@ -80,27 +80,8 @@ function updateInputX() {
         clamp(a_x, 0, 50)
         c = 4
     } else {
-        if (c == 3) {
-            for (let i = a_x; i > 1; i--) {
-                a_x--
-                clamp(a_x, 0, 50)
+        setInterval(deceleration(), 50)
 
-                x += (a_x - 1)
-                console.log("N/A", x)
-            }
-        }
-        if (c == 4) {
-
-            for (let i = a_x; i > 1; i--) {
-
-                a_y--
-                clamp(a_x, 0, 50)
-                x -= (a_x + 1)
-                console.log("N/A", x)
-                setTimeout(() => 10)
-            }
-
-        }
         c = 0
         console.log("N/A", y)
     }
@@ -117,23 +98,22 @@ function clamp(num, min, max) {
 
 function deceleration() {
     if (c == 2) {
-        for (let i = a_y; i > 1; i--) {
-            a_y--
-            clamp(a_y, 0, 50)
 
-            y += (a_y - 1)
-            console.log("N/A", y)
-        }
+        a_y--
+        clamp(a_y, 0, 50)
+
+        y += (a_y - 1)
+        console.log("N/A", y)
+
     } else if (c == 1) {
 
-        for (let i = a_y; i > 1; i--) {
 
-            a_y--
-            clamp(a_y, 0, 50)
+        a_y--
+        clamp(a_y, 0, 50)
 
-            y -= (a_y + 1)
-            console.log("N/A", y)
-        }
+        y -= (a_y + 1)
+        console.log("N/A", y)
+
 
     } else if (c == 3) {
 
@@ -142,4 +122,3 @@ function deceleration() {
     }
     c = 0
 }
-setInterval(deceleration(), 50)
