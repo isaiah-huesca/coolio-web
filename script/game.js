@@ -51,16 +51,14 @@ function updateInputY() {
                 console.log("N/A", y)
 
             } else if (c == 1) {
-
-
                 a_y--
                 clamp(a_y, 0, 50)
 
                 y -= (a_y + 1)
                 console.log("N/A", y)
             }
-            c = 0
         }, 50)
+        c=0
     }
 }
 
@@ -90,9 +88,7 @@ function updateInputX() {
                 x -= (a_x + 1)
                 console.log("right", x)
             }
-            c = 0
         }, 40)
-
         c = 0
         console.log("N/A", x)
     }
