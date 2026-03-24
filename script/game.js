@@ -42,7 +42,7 @@ function updateInputY() {
         clamp(a_y, 0, 50)
         cy = 2
     } else {
-        for(let i = a_y; i > 0; i-- ) {
+        for(let i = a_y; i < 1; i-- ) {
             if (cy == 2) {
                 a_y--
                 clamp(a_y, 0, 50)
