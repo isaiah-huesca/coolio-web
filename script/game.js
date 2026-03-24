@@ -42,20 +42,20 @@ function updateInputY() {
         cy = 2
     } else {
         for(let i = a_y; i > 1; i-- ) {
-            if (cy == 2) {
+            if (cy == 1) {
                 a_y--
                 clamp(a_y, 0, 50)
                 y += (a_y - 1)
                 console.log("down", y)
-            } else if (cy == 1) {
+            } else if (cy == 2) {
                 a_y--
                 clamp(a_y, 0, 50)
                 y -= (a_y + 1)
                 console.log("up", y)
             }
         }
+        cy=0
     }
-    cy=0
 }
 
 function updateInputX() {
