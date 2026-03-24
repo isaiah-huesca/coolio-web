@@ -11,6 +11,7 @@ cy = 0
 
 setInterval(updateInputY, 50);
 setInterval(updateInputX, 50);
+    setInterval(updateVisual, 50);
 
 const keysPressed = {};
 document.addEventListener('keydown', (event) => {
@@ -19,7 +20,6 @@ document.addEventListener('keydown', (event) => {
         keysPressed[event.code] = true;
     }
 
-    setInterval(updateVisual, 50);
 });
 
 document.addEventListener('keyup', (event) => {
@@ -42,7 +42,7 @@ function updateInputY() {
         clamp(a_y, 0, 50)
         cy = 2
     } else {
-        setInterval(function decelerationY() {
+        function decelerationY() {
             if (cy == 2) {
 
                 a_y--
@@ -58,7 +58,7 @@ function updateInputY() {
                 y -= (a_y + 1)
                 console.log("N/A", y)
             }
-        }, 50)
+        }
         cy=0
     }
 }
