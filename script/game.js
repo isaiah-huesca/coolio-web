@@ -24,7 +24,6 @@ document.addEventListener('keydown', (event) => {
 
 document.addEventListener('keyup', (event) => {
     keysPressed[event.code] = false;
-    setInterval(updateVisual, 50);
 });
 
 // In a_ygame loop or animation frame:
