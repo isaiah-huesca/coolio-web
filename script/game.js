@@ -6,7 +6,8 @@ x = 0
 a_y = 0
 a_x = 0
 t = 1
-c = 0
+cx = 0
+cy = 0
 
 setInterval(updateInputY, 50);
 setInterval(updateInputX, 50);
@@ -33,16 +34,16 @@ function updateInputY() {
         y -= (a_y + 1)
         a_y++
         clamp(a_y, 0, 50)
-        c = 1
+        cy = 1
     } else if (keysPressed['ArrowDown']) {
         console.log("down", y)
         y += (a_y + 1)
         a_y++
         clamp(a_y, 0, 50)
-        c = 2
+        cy = 2
     } else {
         setInterval(function decelerationY() {
-            if (c == 2) {
+            if (cy == 2) {
 
                 a_y--
                 clamp(a_y, 0, 50)
@@ -50,7 +51,7 @@ function updateInputY() {
                 y += (a_y - 1)
                 console.log("N/A", y)
 
-            } else if (c == 1) {
+            } else if (cy == 1) {
                 a_y--
                 clamp(a_y, 0, 50)
 
@@ -58,7 +59,7 @@ function updateInputY() {
                 console.log("N/A", y)
             }
         }, 50)
-        c=0
+        cy=0
     }
 }
 
@@ -68,28 +69,28 @@ function updateInputX() {
         x -= (a_x + 1)
         a_x++
         clamp(a_x, 0, 50)
-        c = 3
+        cx = 3
     } else if (keysPressed['ArrowRight']) {
         console.log("down", x)
         x += (a_x + 1)
         a_x++
         clamp(a_x, 0, 50)
-        c = 4
+        cx = 4
     } else {
         setInterval(function decelerationX() {
-            if (c == 3) {
+            if (cx == 3) {
                 a_x--
                 clamp(a_x, 0, 50)
                 x += (a_x - 1)
                 console.log("left", x)
-            } else if (c == 4) {
+            } else if (cx == 4) {
                 a_x--
                 clamp(a_x, 0, 50)
                 x -= (a_x + 1)
                 console.log("right", x)
             }
-        }, 40)
-        c = 0
+        }, 50)
+        cx = 0
         console.log("N/A", x)
     }
 }
