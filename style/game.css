@@ -11,8 +11,15 @@ body {
 }
 
 .ball {
+    height: 2vh;
+    width: 2vh;
+    border-radius: 2vh;
+    background: red;
+}
+
+.player {
     height: 5vh;
-    width: 5vh;
-    border-radius: 5vh;
+    width: 2vw;
+    border-radius: 1vh;
     background: red;
 }
