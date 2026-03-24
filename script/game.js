@@ -42,25 +42,21 @@ function updateInputY() {
         clamp(a_y, 0, 50)
         cy = 2
     } else {
-        function decelerationY() {
+        for(let i = a_y; i > 0; i-- ) {
             if (cy == 2) {
-
                 a_y--
                 clamp(a_y, 0, 50)
-
                 y += (a_y - 1)
-                console.log("N/A", y)
-
+                console.log("down", y)
             } else if (cy == 1) {
                 a_y--
                 clamp(a_y, 0, 50)
-
                 y -= (a_y + 1)
-                console.log("N/A", y)
+                console.log("up", y)
             }
         }
-        cy=0
     }
+    cy=0
 }
 
 function updateInputX() {
@@ -77,7 +73,7 @@ function updateInputX() {
         clamp(a_x, 0, 50)
         cx = 4
     } else {
-        setInterval(function decelerationX() {
+        for(let i = a_x; i > 0; i-- ) {
             if (cx == 3) {
                 a_x--
                 clamp(a_x, 0, 50)
@@ -89,7 +85,7 @@ function updateInputX() {
                 x -= (a_x + 1)
                 console.log("right", x)
             }
-        }, 50)
+        }
         cx = 0
         console.log("N/A", x)
     }
