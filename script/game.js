@@ -73,7 +73,7 @@ function updateInputX() {
         clamp(a_x, 0, 50)
         cx = 4
     } else {
-        for(let i = a_x; i > 0; i-- ) {
+        for(let i = a_x; i > 1; i-- ) {
             if (cx == 3) {
                 a_x--
                 clamp(a_x, 0, 50)
