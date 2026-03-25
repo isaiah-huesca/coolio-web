@@ -17,6 +17,8 @@ body {
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    border: 2px black;
+    padding: 5px;
 }
 
 section{
