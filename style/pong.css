@@ -22,10 +22,17 @@ body {
     box-sizing: border-box;
 }
 
-section{
+section {
     background: blue;
-    height: 10vh;
-    width: 1vw;
     border: 2px;
     margin: 1px;
+}
+.ball{
+    width: 2vh;
+    height: 2vh;
+}
+
+.player {
+    height: 15vh;
+    width: 1vw;
 }
