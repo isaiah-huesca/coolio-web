@@ -4,9 +4,9 @@ document.addEventListener('keydown', (event) => {
     if (!event.repeat) { // Ignore repeated keydown events when key is held down
         keysPressed[event.code] = true;
     }
-
+console.log(keysPressed)
 });
 
 function log() {
-    
+
 }
