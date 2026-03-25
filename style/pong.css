@@ -19,8 +19,13 @@ body {
     overflow: hidden;
     border: 2px black;
     padding: 5px;
+    box-sizing: border-box;
 }
 
 section{
     background: blue;
+    height: 10vh;
+    width: 1vw;
+    border: 2px;
+    margin: 1px;
 }
