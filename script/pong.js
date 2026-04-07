@@ -63,9 +63,8 @@ function updVs() {
 
 function ballMove() {
     v = 10;
-    if (c=0)
-    {
-        v=0
+    if (c = 0) {
+        v = 0
     }
     x += v;
 
