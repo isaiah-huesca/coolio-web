@@ -55,9 +55,9 @@ function updInpt() {
 
 function updVs() {
     timeTransition = a / 2
-    player.style.transition = `transform ${5 / (timeTransition)}s ease-in`
+    player.style.transition = `transform ${5 / (timeTransition)}s ease-out`
     player.style.transform = `translate(0px, ${playerY}px)`
-    ball.style.transition = `transform ${Math.abs(2 / (v))}s ease-out`
+    ball.style.transition = `transform ${Math.abs(2 / (v))}s ease-in`
     ball.style.transform = `translate(${x}px)`
 
 }
