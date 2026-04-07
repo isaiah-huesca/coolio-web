@@ -49,15 +49,15 @@ function updInpt() {
         a = 0
         c = 0
     }
-    a += (a + 1)
+    a += ((a % 10) + 1)
     console.log(playerY, a, timeTransition)
 }
 
 function updVs() {
     timeTransition = a / 2
-    player.style.transition = `transform ${5 / (timeTransition)}s ease-out`
+    player.style.transition = `transform ${5 / (timeTransition)}s ease-in`
     player.style.transform = `translate(0px, ${playerY}px)`
-    ball.style.transition = `transform ${3 / (v)}s ease-in`
+    ball.style.transition = `transform ${Math.abs(2 / (v))}s ease-out`
     ball.style.transform = `translate(${x}px)`
 
 }
@@ -65,7 +65,13 @@ function updVs() {
 function ballMove() {
     v = 0;
     if (c != 0) {
-        v = 10
+        if (c == 1) {
+            v = 10
+
+        }
+        else {
+            v = -10
+        }
     }
     x += v;
 
