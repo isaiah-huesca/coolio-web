@@ -62,8 +62,11 @@ function updVs() {
 }
 
 function ballMove() {
-    if ()
     v = 10;
+    if (c=0)
+    {
+        v=0
+    }
     x += v;
 
 
