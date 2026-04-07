@@ -49,7 +49,7 @@ function updInpt() {
         a = 0
         c = 0
     }
-    a += (a % 10 + 1)
+    a += (a + 1)
     console.log(playerY, a, timeTransition)
 }
 
