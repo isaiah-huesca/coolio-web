@@ -9,6 +9,7 @@ timeTransition = 0
 v = 0;
 x = 0;
 
+
 setInterval(updInpt, 100);
 setInterval(updVs, 100)
 setInterval(ballMove, 100)
