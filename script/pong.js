@@ -2,19 +2,18 @@ const keysPressed = {};
 const ball = document.querySelector(".ball")
 const bot = 0 // undef
 const player = document.querySelector(".player")
-vw=1
+vw = 1
 playerY = 1
 a = 0
 c = 0
 d = 1
 timeTransition = 0
-v = Math.floor(Math.random()*11);
+v = Math.floor((Math.random() * 15)+1);
 x = 0;
 vwToPx(vw);
-setInterval(vwToPx,50000)
-setInterval(updInpt, 100);
-setInterval(updVs, 100)
-setInterval(ballMove, 100)
+setInterval(vwToPx, 50000);
+
+setInterval(GAME, 100);
 
 document.addEventListener('keydown', (event) => {
     // Use event.code to track physical keys consistently
@@ -34,8 +33,13 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
+function GAME() {
+    updInpt();
+    updVs();
+    ballMove();
+}
 function vwToPx(vw) {
-  return (vw * window.innerWidth) / 100;
+    return (vw * window.innerWidth) / 100;
 }
 
 function updInpt() {
@@ -69,18 +73,18 @@ function updVs() {
 }
 
 function ballMove() {
-const bw = ball.offsetLeft;
+    const bw = ball.offsetLeft;
 
-    if(x > (bw)){
-        v = -10
+    if (x > (bw)) {
+        v = -v
     }
-    else if(x < (-bw)){
-        v = 10
+    else if (x < (-bw)) {
+        v = -v
     }
 
     x += v;
 
-console.log(-bw,bw,x)
+    console.log(-bw, bw, x)
 }
 
 function clamp(num, min, max) {
