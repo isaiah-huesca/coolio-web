@@ -14,6 +14,8 @@ vwToPx(vw);
 setInterval(vwToPx, 50000);
 
 setInterval(GAME, 100);
+setInterval(console.clear, 30000);
+
 
 document.addEventListener('keydown', (event) => {
     // Use event.code to track physical keys consistently
