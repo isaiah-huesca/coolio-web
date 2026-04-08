@@ -69,7 +69,8 @@ function updVs() {
 }
 
 function ballMove() {
-let ballX = ball.offsetLeft;
+const bwr = ball.offsetLeft;
+
     v = 0;
     if (d != 0) {
         if (d == 1) {
@@ -80,15 +81,15 @@ let ballX = ball.offsetLeft;
             v = -10
         }
     }
-    if(ballX < (vw)){
-        d=1
-    }
-    else if( ballX > (vw)){
+    if(bwr >= (x)){
         d=2
+    }
+    else if(-(bwr) >= (x)){
+        d=1
     }
     x += v;
 
-console.log(ballX)
+console.log(-bwr,bwr,x)
 }
 
 function clamp(num, min, max) {
