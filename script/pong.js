@@ -2,15 +2,16 @@ const keysPressed = {};
 const ball = document.querySelector(".ball")
 const bot = 0 // undef
 const player = document.querySelector(".player")
+vw=1
 playerY = 1
 a = 0
 c = 0
-d = 0
+d = 1
 timeTransition = 0
 v = 0;
 x = 0;
-
-setInterval()
+vwToPx(vw);
+setInterval(vwToPx,50000)
 setInterval(updInpt, 100);
 setInterval(updVs, 100)
 setInterval(ballMove, 100)
@@ -79,8 +80,11 @@ function ballMove() {
             v = -10
         }
     }
-    if( || ){
-
+    if(ball.style.position > (vw/2)){
+        d=2
+    }
+    else if( ball.style.position > -(vw/2)){
+        d=1
     }
     x += v;
 
