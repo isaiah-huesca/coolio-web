@@ -75,7 +75,7 @@ function ballMove() {
             v = -10
         }
     }
-    if(ball.style.position = `left` || ){
+    if( || ){
 
     }
     x += v;
