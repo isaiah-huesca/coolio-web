@@ -8,7 +8,7 @@ a = 0
 c = 0
 d = 1
 timeTransition = 0
-v = 0;
+v = Math.floor(Math.random()*11);
 x = 0;
 vwToPx(vw);
 setInterval(vwToPx,50000)
@@ -70,14 +70,14 @@ function updVs() {
 
 function ballMove() {
 const bw = ball.offsetLeft;
-    v = 0;
+
     if(x > (bw)){
         v = -10
     }
-    else if(x > (-bw)){
+    else if(x < (-bw)){
         v = 10
     }
-    
+
     x += v;
 
 console.log(-bw,bw,x)
