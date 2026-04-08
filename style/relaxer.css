@@ -70,11 +70,11 @@ body {
   left: 140px;
   width: 20px;
   height: 190px;
-  animation: rotate 7.5s linear forwards infinite;
+  animation: spin 7.5s linear forwards infinite;
   transform-origin: bottom center;
 }
 
-@keyframes rotate {
+@keyframes spin {
   from {
     transform: rotate(0deg);
   }
