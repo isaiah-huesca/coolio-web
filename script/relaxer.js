@@ -1,18 +1,25 @@
 const container = document.getElementById('container');
 const text = document.getElementById('text');
 
-function breathAnimation() {
-    text.innerText = 'Breathe In!';
-    container.className = 'container grow';
-
-    setTimeout(() => {
-        text.innerText = 'Hold';
-
-        setTimeout(() => {
-            text.innerText = 'Breathe Out!';
-            container.className = 'container shrink';
-        }, 7000);
-    }, 4000);
-}
+const totalTime = 7500;
+const breatheTime = (totalTime / 5) * 2;
+const holdTime = totalTime / 5;
 
 breathAnimation();
+
+function breathAnimation() {
+  text.innerText = 'Breathe In!';
+  container.classList.add('grow');
+  container.classList.remove('shrink');
+  setTimeout(() => {
+    text.innerText = 'Hold';
+
+    setTimeout(() => {
+      text.innerText = 'Breathe Out!';
+      container.classList.remove('grow');
+      container.classList.add('shrink');
+    }, holdTime);
+  }, breatheTime);
+}
+
+setInterval(breathAnimation, totalTime);
