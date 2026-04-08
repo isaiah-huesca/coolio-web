@@ -24,13 +24,13 @@ body {
     position: absolute;
     transform: scale(1);
 }
-/* Grow Animation */
+
 .container.grow { animation: grow 4s linear forwards; }
 @keyframes grow {
     from { transform: scale(1); }
     to { transform: scale(1.2); }
 }
-/* Shrink Animation */
+
 .container.shrink { animation: shrink 7s linear forwards; }
 @keyframes shrink {
     from { transform: scale(1.2); }
