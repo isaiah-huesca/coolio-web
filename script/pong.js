@@ -10,7 +10,7 @@ timeTransition = 0
 v = 0;
 x = 0;
 
-
+setInterval()
 setInterval(updInpt, 100);
 setInterval(updVs, 100)
 setInterval(ballMove, 100)
@@ -32,6 +32,10 @@ document.addEventListener('keydown', (event) => {
         console.log(keysPressed)
     }
 });
+
+function vwToPx(vw) {
+  return (vw * window.innerWidth) / 100;
+}
 
 function updInpt() {
     if (keysPressed['ArrowUp'] == 1) {
