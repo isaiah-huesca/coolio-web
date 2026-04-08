@@ -5,6 +5,7 @@ const player = document.querySelector(".player")
 playerY = 1
 a = 0
 c = 0
+d = 0
 timeTransition = 0
 v = 0;
 x = 0;
@@ -65,14 +66,17 @@ function updVs() {
 function ballMove() {
     ball.x
     v = 0;
-    if (c != 0) {
-        if (c == 1) {
+    if (d != 0) {
+        if (d == 1) {
             v = 10
 
         }
         else {
             v = -10
         }
+    }
+    if(ball.style.position = `left` || ){
+
     }
     x += v;
 
