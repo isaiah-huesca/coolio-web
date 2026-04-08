@@ -69,7 +69,7 @@ function updVs() {
 }
 
 function ballMove() {
-    ball.x
+let ballX = ball.offsetLeft;
     v = 0;
     if (d != 0) {
         if (d == 1) {
@@ -80,15 +80,15 @@ function ballMove() {
             v = -10
         }
     }
-    if(ball.style.position > (vw/2)){
-        d=2
-    }
-    else if( ball.style.position > -(vw/2)){
+    if(ballX < (vw)){
         d=1
+    }
+    else if( ballX > (vw)){
+        d=2
     }
     x += v;
 
-
+console.log(ballX)
 }
 
 function clamp(num, min, max) {
