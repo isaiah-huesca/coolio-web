@@ -38,6 +38,7 @@ function GAME() {
     updVs();
     ballMove();
 }
+
 function vwToPx(vw) {
     return (vw * window.innerWidth) / 100;
 }
@@ -76,10 +77,10 @@ function ballMove() {
     const bw = ball.offsetLeft;
 
     if (x > (bw)) {
-        v = -v
+        v = -v;
     }
     else if (x < (-bw)) {
-        v = -v
+        v = -v;
     }
 
     x += v;
