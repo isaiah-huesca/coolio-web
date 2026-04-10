@@ -3,14 +3,20 @@ const ball = document.querySelector(".ball")
 const bot = 0 // undef
 const player = document.querySelector(".player")
 vw = 1
+vh = 1
 playerY = 1
 a = 0
 c = 0
 d = 1
 timeTransition = 0
-v = Math.floor((Math.random() * 15)+1);
+vx = Math.floor((Math.random() * 15)+5);
+vy = Math.floor((Math.random() * 15)+1);
 x = 0;
+y = 0;
+
 vwToPx(vw);
+vhToPx(vh);
+
 setInterval(vwToPx, 50000);
 
 setInterval(GAME, 100);
@@ -36,7 +42,7 @@ document.addEventListener('keydown', (event) => {
 });
 
 function GAME() {
-    updInpt();
+    playerControll();
     updVs();
     ballMove();
 }
@@ -45,7 +51,11 @@ function vwToPx(vw) {
     return (vw * window.innerWidth) / 100;
 }
 
-function updInpt() {
+function vhToPx(vh) {
+    return (vh * window.innerHeight) / 100;
+}
+
+function playerControll() {
     if (keysPressed['ArrowUp'] == 1) {
         playerY -= (1 + (a))
         if (c != 1) {
@@ -70,24 +80,34 @@ function updVs() {
     timeTransition = a / 2
     player.style.transition = `transform ${5 / (timeTransition)}s ease-out`
     player.style.transform = `translate(0px, ${playerY}px)`
-    ball.style.transition = `transform ${Math.abs(2 / (v))}s ease-in`
-    ball.style.transform = `translate(${x}px)`
+    ball.style.transition = `transform ${Math.abs(2 / (Math.abs(vx)+ Math.abs(vy)/2))}s ease-in`
+    ball.style.transform = `translate(${x}px, ${y}px)`
 
 }
 
 function ballMove() {
-    const bw = ball.offsetLeft;
+    const blr = ball.offsetLeft;
+    const btb = ball.offsetTop;
 
-    if (x > (bw)) {
-        v = -v;
+
+    if (x > (blr)) {
+        vx = -vx;
     }
-    else if (x < (-bw)) {
-        v = -v;
+    else if (x < (-blr)) {
+        vx = -vx;
     }
 
-    x += v;
+    if (y > (btb)) {
+        vy = -vy;
+    }
+    else if (y < (-btb)) {
+        vy = -vy;
+    }
 
-    console.log(-bw, bw, x)
+    y += vy;
+    x += vx;
+
+    console.log(blr, btb, x, y, vx, vy)
 }
 
 function clamp(num, min, max) {
