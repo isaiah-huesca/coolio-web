@@ -25,8 +25,7 @@ vwToPx(vw);
 vhToPx(vh);
 
 setInterval(vwToPx, 50000);
-
-setInterval(GAME, 30);
+GAME;
 setInterval(console.clear, 30000);
 
 
@@ -53,6 +52,7 @@ function GAME() {
     updVs();
     isColliding();
     ballMove();
+    requestAnimationFrame(GAME)
 }
 
 function vwToPx(vw) {
