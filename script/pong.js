@@ -9,10 +9,12 @@ const ptb = player.offsetTop;
 vw = 1
 vh = 1
 playerY = 1
+playerX = player.x
 a = 0
 c = 0
 d = 1
 timeTransition = 0
+pvx =vx = Math.floor((Math.random() * 5) + 6);
 vx = Math.floor((Math.random() * 5) + 5);
 vy = Math.floor((Math.random() * 5) + 1);
 x = 0;
@@ -62,8 +64,6 @@ function vhToPx(vh) {
 }
 
 function playerControll() {
-    a += ((a % 10) + 1)
-
     if (keysPressed['ArrowUp'] == 1) {
         playerY -= (1 + (a))
         if (c != 1) {
@@ -131,7 +131,12 @@ function ballMove() {
 }
 
 function isColliding() {
-    if (playerY + )
+    if ((playerY + 45 > y && playerY - 45 < y) && (playerX + 5 > x && playerX - 5 < x)) {
+        touch = 1
+    }
+    else {
+        touch = 0
+    }
 }
 
 function clamp(num, min, max) {
