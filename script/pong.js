@@ -2,6 +2,7 @@ const keysPressed = {};
 const ball = document.querySelector(".ball")
 const bot = 0 // undef
 const player = document.querySelector(".player")
+const pSz = player.getBoundingClientRect();
 vw = 1
 vh = 1
 playerY = 1
@@ -13,6 +14,7 @@ vx = Math.floor((Math.random() * 15) + 5);
 vy = Math.floor((Math.random() * 15) + 1);
 x = 0;
 y = 0;
+touch = 0;
 
 vwToPx(vw);
 vhToPx(vh);
@@ -104,7 +106,7 @@ function ballMove() {
     else if (y < (-btb)) {
         vy = -vy;
     }
-    if (isColliding(player)) {
+    if (touch == 1) {
         vx = -vx
     }
 
@@ -115,20 +117,23 @@ function ballMove() {
 }
 
 function isColliding() {
-    const pSz = player.getBoundingClientRect();
-    bh=ball.height
-    bw=ball.width
-    pX=0
-    pY=playerY
-    pW=player.width
-    pH=player.height
+    bh = ball.height
+    bw = ball.width
+    pX = 0
+    pY = playerY
+    pW = player.width
+    pH = player.height
     console.log(pX, pY, pW, pH)
-    return (
-        (pY < ball.x + bw) &&
+    if ((pY < ball.x + bw) &&
         (pX + pad.width > ball.x) &&
         (pY < ball.y + bh) &&
-        (pY + pad.height > ball.y)
-    );
+        (pY + pad.height > ball.y)) {
+         touch = 1;
+    }
+    else {
+         touch = 0;
+    }
+    return (touch);
 }
 
 function clamp(num, min, max) {
