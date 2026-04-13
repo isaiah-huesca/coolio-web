@@ -80,7 +80,7 @@ function playerControll() {
         a = 0
         c = 0
     }
-    else if (ptb > playerY || -ptb < playerY) {
+    if (ptb < playerY || -ptb > playerY) {
         a = 0
         playerY = playerY
     }
