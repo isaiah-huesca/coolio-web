@@ -3,6 +3,7 @@ const ball = document.querySelector(".ball")
 const bot = 0 // undef
 const player = document.querySelector(".player")
 const pSz = player.getBoundingClientRect();
+const ballsz = ball.getBoundingClientRect();
 vw = 1
 vh = 1
 playerY = 1
@@ -117,21 +118,21 @@ function ballMove() {
 }
 
 function isColliding() {
-    bh = ball.height
-    bw = ball.width
+    bh = (ballsz.height / 2)
+    bw = (ballsz.width / 2)
     pX = 0
     pY = playerY
-    pW = pSz.width
-    pH = pSz.height
+    pW = (pSz.width / 2)
+    pH = (pSz.height / 2)
     console.log(pX, pY, pW, pH, touch)
     if ((pY < x + bw) &&
-        (pX + pad.width > x) &&
+        (pX + pW > x) &&
         (pY < y + bh) &&
-        (pY + pad.height > y)) {
-         touch = 1;
+        (pY + pH > y)) {
+        touch = 1;
     }
     else {
-         touch = 0;
+        touch = 0;
     }
     return (touch);
 }
