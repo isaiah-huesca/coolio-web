@@ -139,7 +139,7 @@ function isColliding() {
     pH = (pSz.height)
     console.log(pX, pY, pW, pH, touch)
     if ((pY < x + bw) &&
-        (pX + pW > x || (pX + pW > x)) &&
+        (pX + pW > x) &&
         (pY < y + bh) &&
         (pY + pH > y)) {
         touch = 1;
