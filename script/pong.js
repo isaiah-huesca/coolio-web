@@ -24,7 +24,7 @@ vhToPx(vh);
 
 setInterval(vwToPx, 50000);
 
-setInterval(GAME, 10);
+setInterval(GAME, 30);
 setInterval(console.clear, 30000);
 
 
