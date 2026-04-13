@@ -82,9 +82,7 @@ function playerControll() {
 
 function updVs() {
     timeTransition = a / 2
-    player.style.transition = `transform ${5 / (timeTransition)}s ease-out`
     player.style.transform = `translate(0px, ${playerY}px)`
-    ball.style.transition = `transform ${Math.abs(2 / (Math.abs(vx) + Math.abs(vy) / 2))}s ease-in`
     ball.style.transform = `translate(${x}px, ${y}px)`
 
 }
