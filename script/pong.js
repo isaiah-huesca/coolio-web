@@ -81,8 +81,16 @@ function playerControll() {
         c = 0
     }
     if (ptb < playerY || -ptb > playerY) {
+        if (ptb < playerY){
+            playerY = ptb
+        }
+        else if (-ptb > playerY){
+            playerY = -ptb
+        }
         a = 0
-        playerY = playerY
+        keysPressed['ArrowUp'] = false;
+        keysPressed['ArrowDown'] = false;
+        keysPressed['Space'] = false;
     }
     console.log(playerY, ptb, a, timeTransition)
 }
