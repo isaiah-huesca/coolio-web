@@ -131,7 +131,7 @@ function ballMove() {
 }
 
 function isColliding() {
-
+    if (playerY + )
 }
 
 function clamp(num, min, max) {
