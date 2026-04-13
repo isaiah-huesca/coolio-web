@@ -4,6 +4,8 @@ const bot = 0 // undef
 const player = document.querySelector(".player")
 const pSz = player.getBoundingClientRect();
 const ballsz = ball.getBoundingClientRect();
+const ptb = player.offsetTop;
+
 vw = 1
 vh = 1
 playerY = 1
@@ -60,6 +62,8 @@ function vhToPx(vh) {
 }
 
 function playerControll() {
+    a += ((a % 10) + 1)
+
     if (keysPressed['ArrowUp'] == 1) {
         playerY -= (1 + (a))
         if (c != 1) {
@@ -76,8 +80,11 @@ function playerControll() {
         a = 0
         c = 0
     }
-    a += ((a % 10) + 1)
-    console.log(playerY, a, timeTransition)
+    else if (ptb > playerY || -ptb < playerY) {
+        a = 0
+        playerY = playerY
+    }
+    console.log(playerY, ptb, a, timeTransition)
 }
 
 function updVs() {
