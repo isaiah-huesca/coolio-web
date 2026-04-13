@@ -11,8 +11,8 @@ a = 0
 c = 0
 d = 1
 timeTransition = 0
-vx = Math.floor((Math.random() * 15) + 5);
-vy = Math.floor((Math.random() * 15) + 1);
+vx = Math.floor((Math.random() * 10) + 5);
+vy = Math.floor((Math.random() * 10) + 1);
 x = 0;
 y = 0;
 touch = 0;
@@ -22,7 +22,7 @@ vhToPx(vh);
 
 setInterval(vwToPx, 50000);
 
-setInterval(GAME, 100);
+setInterval(GAME, 70);
 setInterval(console.clear, 30000);
 
 
@@ -124,7 +124,7 @@ function isColliding() {
     pH = (pSz.height / 1)
     console.log(pX, pY, pW, pH, touch)
     if ((pY < x + bw) &&
-        (pX + pW + 10 > x || (pX + pW - 10 > x)) &&
+        (pX + pW -10 > x || (pX + pW + 10 > x)) &&
         (pY < y + bh) &&
         (pY + pH > y)) {
         touch = 1;
