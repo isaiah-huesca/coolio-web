@@ -81,10 +81,10 @@ function playerControll() {
         c = 0
     }
     if (ptb < playerY || -ptb > playerY) {
-        if (ptb < playerY){
+        if (ptb < playerY) {
             playerY = ptb
         }
-        else if (-ptb > playerY){
+        else if (-ptb > playerY) {
             playerY = -ptb
         }
         a = 0
@@ -131,23 +131,7 @@ function ballMove() {
 }
 
 function isColliding() {
-    bh = (ballsz.height)
-    bw = (ballsz.width)
-    pX = 0
-    pY = playerY
-    pW = (pSz.width)
-    pH = (pSz.height)
-    console.log(pX, pY, pW, pH, touch)
-    if ((pY < x + bw) &&
-        (pX + pW > x) &&
-        (pY < y + bh) &&
-        (pY + pH > y)) {
-        touch = 1;
-    }
-    else {
-        touch = 0;
-    }
-    return (touch);
+
 }
 
 function clamp(num, min, max) {
