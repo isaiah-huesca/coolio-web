@@ -45,6 +45,7 @@ function GAME() {
     playerControll();
     updVs();
     ballMove();
+    isColliding(player)
 }
 
 function vwToPx(vw) {
@@ -103,11 +104,24 @@ function ballMove() {
     else if (y < (-btb)) {
         vy = -vy;
     }
+    if (isColliding(player)) {
+        vx = -vx
+    }
 
     y += vy;
     x += vx;
 
-    console.log(blr, btb, x, y, vx, vy)
+    console.log(blr, btb, x, y, vx, vy, playerY)
+}
+
+function isColliding(pad) {
+ console.log(pad.x, pad.y, pad.width, pad.height)
+  return (
+    (pad.x < ball.x + ball.width) &&
+    (pad.x + pad.width > ball.x) &&
+    (pad.y < ball.y + ball.height) &&
+    (pad.y + pad.height > ball.y)
+  );
 }
 
 function clamp(num, min, max) {
