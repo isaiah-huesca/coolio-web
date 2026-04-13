@@ -44,8 +44,8 @@ document.addEventListener('keydown', (event) => {
 function GAME() {
     playerControll();
     updVs();
+    isColliding();
     ballMove();
-    isColliding(player)
 }
 
 function vwToPx(vw) {
@@ -115,12 +115,13 @@ function ballMove() {
 }
 
 function isColliding() {
+    const pSz = player.getBoundingClientRect();
     bh=ball.height
     bw=ball.width
     pX=0
     pY=playerY
     pW=player.width
-    pH=player.Height
+    pH=player.height
     console.log(pX, pY, pW, pH)
     return (
         (pY < ball.x + bw) &&
