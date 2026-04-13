@@ -9,8 +9,8 @@ a = 0
 c = 0
 d = 1
 timeTransition = 0
-vx = Math.floor((Math.random() * 15)+5);
-vy = Math.floor((Math.random() * 15)+1);
+vx = Math.floor((Math.random() * 15) + 5);
+vy = Math.floor((Math.random() * 15) + 1);
 x = 0;
 y = 0;
 
@@ -81,7 +81,7 @@ function updVs() {
     timeTransition = a / 2
     player.style.transition = `transform ${5 / (timeTransition)}s ease-out`
     player.style.transform = `translate(0px, ${playerY}px)`
-    ball.style.transition = `transform ${Math.abs(2 / (Math.abs(vx)+ Math.abs(vy)/2))}s ease-in`
+    ball.style.transition = `transform ${Math.abs(2 / (Math.abs(vx) + Math.abs(vy) / 2))}s ease-in`
     ball.style.transform = `translate(${x}px, ${y}px)`
 
 }
@@ -115,13 +115,16 @@ function ballMove() {
 }
 
 function isColliding(pad) {
- console.log(pad.x, pad.y, pad.width, pad.height)
-  return (
-    (pad.x < ball.x + ball.width) &&
-    (pad.x + pad.width > ball.x) &&
-    (pad.y < ball.y + ball.height) &&
-    (pad.y + pad.height > ball.y)
-  );
+    let padX = pad.x
+    let padY = pad.y
+
+    console.log(padX, pad.y, pad.width, pad.height)
+    return (
+        (padY < ball.x + ball.width) &&
+        (padX + pad.width > ball.x) &&
+        (padY < ball.y + ball.height) &&
+        (padY + pad.height > ball.y)
+    );
 }
 
 function clamp(num, min, max) {
