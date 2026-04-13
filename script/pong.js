@@ -116,12 +116,12 @@ function ballMove() {
 }
 
 function isColliding() {
-    bh = (ballsz.height / 2)
+    bh = (ballsz.height / 1)
     bw = (ballsz.width / 2)
     pX = 0
     pY = playerY
     pW = (pSz.width / 2)
-    pH = (pSz.height / 2)
+    pH = (pSz.height / 1)
     console.log(pX, pY, pW, pH, touch)
     if ((pY < x + bw) &&
         (pX + pW > x) &&
