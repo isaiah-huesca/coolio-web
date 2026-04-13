@@ -114,16 +114,19 @@ function ballMove() {
     console.log(blr, btb, x, y, vx, vy, playerY)
 }
 
-function isColliding(pad) {
-    let padX = pad.x
-    let padY = pad.y
-
-    console.log(padX, pad.y, pad.width, pad.height)
+function isColliding() {
+    bh=ball.height
+    bw=ball.width
+    pX=player.x
+    pY=player.y
+    pW=player.width
+    pH=player.Height
+    console.log(pX, pY, pW, pH)
     return (
-        (padY < ball.x + ball.width) &&
+        (pY < ball.x + bw) &&
         (padX + pad.width > ball.x) &&
-        (padY < ball.y + ball.height) &&
-        (padY + pad.height > ball.y)
+        (pY < ball.y + bh) &&
+        (pY + pad.height > ball.y)
     );
 }
 
