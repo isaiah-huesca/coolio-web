@@ -121,13 +121,13 @@ function isColliding() {
     bw = ball.width
     pX = 0
     pY = playerY
-    pW = player.width
-    pH = player.height
-    console.log(pX, pY, pW, pH)
-    if ((pY < ball.x + bw) &&
-        (pX + pad.width > ball.x) &&
-        (pY < ball.y + bh) &&
-        (pY + pad.height > ball.y)) {
+    pW = pSz.width
+    pH = pSz.height
+    console.log(pX, pY, pW, pH, touch)
+    if ((pY < x + bw) &&
+        (pX + pad.width > x) &&
+        (pY < y + bh) &&
+        (pY + pad.height > y)) {
          touch = 1;
     }
     else {
