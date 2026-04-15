@@ -9,15 +9,15 @@ vw = 1
 vh = 1
 playerY = 1
 playerX = (45 * window.innerWidth) / 100
-a = 0
-c = 0
-d = 1
+acceleration = 0
+lastKeyPresed = 0
+directionChance = 1
 timeTransition = 0
 pvy = 11
-vx = rand(1, 9)
-vy = rand(1, 9)
-x = 0;
-y = 0;
+ballVX = rand(1, 9)
+ballVY = rand(1, 9)
+ballX = 0;
+ballY = 0;
 touch = 0;
 
 vwToPx(vw);
@@ -41,7 +41,7 @@ document.addEventListener('keydown', (event) => {
             keysPressed['ArrowUp'] = false;
             keysPressed['ArrowDown'] = false;
             keysPressed[event.code] = true;
-            c = 0
+            lastKeyPresed = 0
         }
         console.log(keysPressed)
     }
@@ -57,7 +57,7 @@ document.addEventListener('keyup', (event) => {
         keysPressed['ArrowUp'] = false;
         keysPressed['ArrowDown'] = false;
         keysPressed[event.code] = true;
-        c = 0
+        lastKeyPresed = 0
     }
     console.log(keysPressed)
 });
@@ -78,22 +78,22 @@ function vhToPx(vh) {
 }
 
 function playerControll() {
-    a += .5
+    acceleration += .5
     if (keysPressed['ArrowUp'] == 1) {
         playerY -= pvy
-        if (c != 1) {
-            a = 0
+        if (lastKeyPresed != 1) {
+            acceleration = 0
         }
-        c = 1
+        lastKeyPresed = 1
     } else if (keysPressed['ArrowDown'] == 1) {
         playerY += pvy
-        if (c != 2) {
-            a = 0
+        if (lastKeyPresed != 2) {
+            acceleration = 0
         }
-        c = 2
-    } else if (c == 0) {
-        a = 0
-        c = 0
+        lastKeyPresed = 2
+    } else if (lastKeyPresed == 0) {
+        acceleration = 0
+        lastKeyPresed = 0
     }
     if (ptb < playerY || -ptb > playerY) {
         if (ptb < playerY) {
@@ -101,91 +101,91 @@ function playerControll() {
         } else if (-ptb > playerY) {
             playerY = -ptb
         }
-        a = 0
+        acceleration = 0
         keysPressed['ArrowUp'] = false;
         keysPressed['ArrowDown'] = false;
         keysPressed['Space'] = false;
     }
-    console.log(playerY, ptb, a, timeTransition)
+    console.log(playerY, ptb, acceleration, timeTransition)
 }
 
 function updVs() {
-    timeTransition = a / 2
+    timeTransition = acceleration / 2
     player.style.transform = `translate(${playerX}px, ${playerY}px)`
-    ball.style.transform = `translate(${x}px, ${y}px)`
+    ball.style.transform = `translate(${ballX}px, ${ballY}px)`
 
 }
 
 function ballMove() {
     const blr = ball.offsetLeft;
     const btb = ball.offsetTop;
-    d = rand(0, 2);
+    directionChance = rand(0, 2);
 
 
-    if (x > (blr)) {
-        vx = -vx;
+    if (ballX > (blr)) {
+        ballVX = -ballVX;
         if (rand(0, 2) == rand(0, 2)) {
-            vy = rand(1, 10)
+            ballVY = rand(1, 10)
         }
-        if (d == rand(0, 2)) {
-            vy = -vy;
+        if (directionChance == rand(0, 2)) {
+            ballVY = -ballVY;
         }
-    } else if (x < (-blr)) {
-        vx = -vx;
+    } else if (ballX < (-blr)) {
+        ballVX = -ballVX;
         if (rand(0, 2) == rand(0, 2)) {
-            vy = rand(1, 10)
+            ballVY = rand(1, 10)
         }
-        if (d == rand(0, 2)) {
-            vy = -vy;
+        if (directionChance == rand(0, 2)) {
+            ballVY = -ballVY;
 
         }
     }
 
-    if (y > (btb)) {
+    if (ballY > (btb)) {
         if (rand(0, 2) == rand(0, 2)) {
-            vx = rand(1, 10)
+            ballVX = rand(1, 10)
         }
-        if (d == rand(0, 2)) {
-            vx = -vx;
+        if (directionChance == rand(0, 2)) {
+            ballVX = -ballVX;
         }
-        vy = -vy;
-    } else if (y < (-btb)) {
+        ballVY = -ballVY;
+    } else if (ballY < (-btb)) {
         if (rand(0, 2) == rand(0, 2)) {
-            vx = rand(1, 10)
+            ballVX = rand(1, 10)
         }
-        if (d == rand(0, 2)) {
-            vx = -vx;
+        if (directionChance == rand(0, 2)) {
+            ballVX = -ballVX;
         }
-        vy = -vy;
+        ballVY = -ballVY;
     }
-    else if ((y < (-btb-50))||(y > (btb+50))){
-        x=0
-        y=0
+    else if ((ballY < (-btb-50))||(ballY > (btb+50))){
+        ballX=0
+        ballY=0
     }
 
     checkCollision(player,ball);
 
     if (touch == 1) {
-        if (d == rand(0, 2)) {
-            vy = -vy;
+        if (directionChance == rand(0, 2)) {
+            ballVY = -ballVY;
 
         }
-        vx = -vx
+        ballVX = -ballVX
     }
 
-    y += vy;
-    x += vx;
+    ballY += ballVY;
+    ballX += ballVX;
 
-    console.log(blr, btb, x, y, vx, vy, playerY)
+    console.log(blr, btb, ballX, ballY, ballVX, ballVY, playerY)
 }
 
 function checkCollision(rect1, rect2) {
     rect1 = rect1.getBoundingClientRect();
     rect2 = rect2.getBoundingClientRect();
-    if (rect1.x < rect2.x + rect2.width &&
-        rect1.x + rect1.width > rect2.x &&
-        rect1.y < rect2.y + rect2.height &&
-        rect1.y + rect1.height > rect2.y) {
+    if (rect1.ballX < rect2.ballX + rect2.width &&
+        rect1.ballX + rect1.width > rect2.ballX &&
+        rect1.ballY < rect2.ballY + rect2.height &&
+        rect1.ballY + rect1.height > rect2.ballY) {
         touch = 1
     } else {
         touch = 0
