@@ -125,18 +125,18 @@ function ballMove() {
 
     if (x > (blr)) {
         vx = -vx;
-        if (d == rand(0, 2)) {
-            if (rand(0, 2) == rand(0, 2)) {
+        if (rand(0, 2) == rand(0, 2)) {
                 vy = rand(1, 10)
             }
+        if (d == rand(0, 2)) {
             vy = -vy;
         }
     } else if (x < (-blr)) {
         vx = -vx;
-        if (d == rand(0, 2)) {
-            if (rand(0, 2) == rand(0, 2)) {
+        if (rand(0, 2) == rand(0, 2)) {
                 vy = rand(1, 10)
             }
+        if (d == rand(0, 2)) {
             vy = -vy;
 
         }
