@@ -78,6 +78,7 @@ function vhToPx(vh) {
 }
 
 function playerControll() {
+        playerX = (45 * window.innerWidth) / 100
     acceleration += .5
     if (keysPressed['ArrowUp'] == 1) {
         playerY -= playerVelocityY
@@ -181,10 +182,10 @@ function ballMove() {
 function checkCollision(rect1, rect2) {
     rect1 = rect1.getBoundingClientRect();
     rect2 = rect2.getBoundingClientRect();
-    if (rect1.ballX < rect2.ballX + rect2.width &&
-        rect1.ballX + rect1.width > rect2.ballX &&
-        rect1.ballY < rect2.ballY + rect2.height &&
-        rect1.ballY + rect1.height > rect2.ballY) {
+    if (rect1.x < rect2.x + rect2.width &&
+        rect1.x + rect1.width > rect2.x &&
+        rect1.y < rect2.y + rect2.height &&
+        rect1.y + rect1.height > rect2.y) {
         collision = 1
     } else {
         collision = 0
