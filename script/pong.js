@@ -158,7 +158,7 @@ function ballMove() {
         }
         ballVY = -ballVY;
     }
-    if ((ballY < (-ballScreenHeight - 50)) || (ballY > (ballScreenHeight + 50))) {
+    if ((ballY < (-ballScreenHeight - 50)) || (ballX > (ballScreenWidth + 50))||(ballX < (-ballScreenWidth - 50)) || (ballX > (ballScreenWidth + 50))) {
         ballX = 0
         ballY = 0
     }
