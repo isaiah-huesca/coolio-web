@@ -13,7 +13,7 @@ acceleration = 0
 lastKeyPresed = 0
 directionChance = 1
 timeTransition = 0
-pvy = 11
+playerVelocityY = 11
 ballVX = rand(1, 9)
 ballVY = rand(1, 9)
 ballX = 0;
@@ -80,13 +80,13 @@ function vhToPx(vh) {
 function playerControll() {
     acceleration += .5
     if (keysPressed['ArrowUp'] == 1) {
-        playerY -= pvy
+        playerY -= playerVelocityY
         if (lastKeyPresed != 1) {
             acceleration = 0
         }
         lastKeyPresed = 1
     } else if (keysPressed['ArrowDown'] == 1) {
-        playerY += pvy
+        playerY += playerVelocityY
         if (lastKeyPresed != 2) {
             acceleration = 0
         }
