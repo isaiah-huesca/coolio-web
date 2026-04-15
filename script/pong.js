@@ -149,7 +149,6 @@ function ballMove() {
             vx = -vx;
         }
         vy = -vy;
-
     } else if (y < (-btb)) {
         if (rand(0, 2) == rand(0, 2)) {
             vx = rand(1, 10)
@@ -158,7 +157,10 @@ function ballMove() {
             vx = -vx;
         }
         vy = -vy;
-
+    }
+    else if ((y < (-btb-50))||(y > (btb+50))){
+        x=0
+        y=0
     }
 
     checkCollision(player,ball);
