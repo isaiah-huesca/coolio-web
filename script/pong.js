@@ -47,6 +47,21 @@ document.addEventListener('keydown', (event) => {
         console.log(keysPressed)
     }
 });
+document.addEventListener('keyup', (event) => {
+    // Use event.code to track physical keys consistently
+        if (event.code == 'ArrowUp' || event.code == 'ArrowDown') {
+            keysPressed['ArrowUp'] = false;
+            keysPressed['ArrowDown'] = false;
+            keysPressed['Space'] = false;
+            keysPressed[event.code] = true;
+        } else if (event.code == 'Space') {
+            keysPressed['ArrowUp'] = false;
+            keysPressed['ArrowDown'] = false;
+            keysPressed[event.code] = true;
+            c = 0
+        }
+        console.log(keysPressed)
+});
 
 function GAME() {
     playerControll();
