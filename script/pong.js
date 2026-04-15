@@ -78,7 +78,7 @@ function vhToPx(vh) {
 }
 
 function playerControll() {
-        playerX = (45 * window.innerWidth) / 100
+    playerX = (45 * window.innerWidth) / 100
     if (keysPressed['ArrowUp'] == 1) {
         playerY -= playerVelocityY
         if (lastKeyPresed != 1) {
@@ -158,7 +158,7 @@ function ballMove() {
         }
         ballVY = -ballVY;
     }
-    if ((ballY < (-ballScreenHeight - 50)) || (ballX > (ballScreenWidth + 50))||(ballX < (-ballScreenWidth - 50)) || (ballX > (ballScreenWidth + 50))) {
+    if ((ballY < (-ballScreenHeight - 50)) || (ballX > (ballScreenWidth + 50)) || (ballX < (-ballScreenWidth - 50)) || (ballX > (ballScreenWidth + 50))) {
         ballX = 0
         ballY = 0
     }
