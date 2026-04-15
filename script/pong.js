@@ -14,8 +14,8 @@ a = 0
 c = 0
 d = 1
 timeTransition = 0
-pvx = Math.floor((Math.random() * 5) + 6);
-vx = Math.floor((Math.random() * 5) + 5);
+pvx = rand(6,5)
+vx = rand(10,5)
 vy = Math.floor((Math.random() * 5) + 1);
 x = 0;
 y = 0;
@@ -158,4 +158,8 @@ function isColliding() {
 
 function clamp(num, min, max) {
     return Math.min(Math.max(num, min), max);
+}
+
+function rand(min, max) {
+    return Math.floor(((Math.random() * max) + min));
 }
