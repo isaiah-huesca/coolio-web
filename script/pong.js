@@ -117,12 +117,12 @@ function updVs() {
 }
 
 function ballMove() {
-    const blr = ball.offsetLeft;
-    const btb = ball.offsetTop;
+    const ballScreenWidth = ball.offsetLeft;
+    const ballScreenHeight = ball.offsetTop;
     directionChance = rand(0, 2);
 
 
-    if (ballX > (blr)) {
+    if (ballX > (ballScreenWidth)) {
         ballVX = -ballVX;
         if (rand(0, 2) == rand(0, 2)) {
             ballVY = rand(1, 10)
@@ -130,7 +130,7 @@ function ballMove() {
         if (directionChance == rand(0, 2)) {
             ballVY = -ballVY;
         }
-    } else if (ballX < (-blr)) {
+    } else if (ballX < (-ballScreenWidth)) {
         ballVX = -ballVX;
         if (rand(0, 2) == rand(0, 2)) {
             ballVY = rand(1, 10)
@@ -141,7 +141,7 @@ function ballMove() {
         }
     }
 
-    if (ballY > (btb)) {
+    if (ballY > (ballScreenHeight)) {
         if (rand(0, 2) == rand(0, 2)) {
             ballVX = rand(1, 10)
         }
@@ -149,7 +149,7 @@ function ballMove() {
             ballVX = -ballVX;
         }
         ballVY = -ballVY;
-    } else if (ballY < (-btb)) {
+    } else if (ballY < (-ballScreenHeight)) {
         if (rand(0, 2) == rand(0, 2)) {
             ballVX = rand(1, 10)
         }
@@ -158,7 +158,7 @@ function ballMove() {
         }
         ballVY = -ballVY;
     }
-    else if ((ballY < (-btb-50))||(ballY > (btb+50))){
+    else if ((ballY < (-ballScreenHeight-50))||(ballY > (ballScreenHeight+50))){
         ballX=0
         ballY=0
     }
@@ -176,7 +176,7 @@ function ballMove() {
     ballY += ballVY;
     ballX += ballVX;
 
-    console.log(blr, btb, ballX, ballY, ballVX, ballVY, playerY)
+    console.log(ballScreenWidth, ballScreenHeight, ballX, ballY, ballVX, ballVY, playerY)
 }
 
 function checkCollision(rect1, rect2) {
