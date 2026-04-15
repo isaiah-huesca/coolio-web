@@ -14,9 +14,9 @@ a = 0
 c = 0
 d = 1
 timeTransition = 0
-pvx = rand(6,5)
-vx = rand(10,5)
-vy = Math.floor((Math.random() * 5) + 1);
+pvx = rand(5,10)
+vx = rand(1,10)
+vy = rand(1,10)
 x = 0;
 y = 0;
 touch = 0;
@@ -161,5 +161,8 @@ function clamp(num, min, max) {
 }
 
 function rand(min, max) {
-    return Math.floor(((Math.random() * max) + min));
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
