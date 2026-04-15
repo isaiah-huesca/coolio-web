@@ -65,6 +65,7 @@ function vhToPx(vh) {
 }
 
 function playerControll() {
+    a++
     if (keysPressed['ArrowUp'] == 1) {
         playerY -= (1 + (a))
         if (c != 1) {
