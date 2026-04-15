@@ -157,13 +157,12 @@ function ballMove() {
             ballVX = -ballVX;
         }
         ballVY = -ballVY;
-    }
-    else if ((ballY < (-ballScreenHeight-50))||(ballY > (ballScreenHeight+50))){
-        ballX=0
-        ballY=0
+    } else if ((ballY < (-ballScreenHeight - 50)) || (ballY > (ballScreenHeight + 50))) {
+        ballX = 0
+        ballY = 0
     }
 
-    checkCollision(player,ball);
+    checkCollision(player, ball);
 
     if (collision == 1) {
         if (directionChance == rand(0, 2)) {
