@@ -8,12 +8,12 @@ const ptb = player.offsetTop;
 vw = 1
 vh = 1
 playerY = 1
-playerX = player.x
+playerX = 
 a = 0
 c = 0
 d = 1
 timeTransition = 0
-pvx = rand(5, 10)
+pvy = 10
 vx = rand(1, 10)
 vy = rand(1, 10)
 x = 0;
@@ -80,13 +80,13 @@ function vhToPx(vh) {
 function playerControll() {
     a += .5
     if (keysPressed['ArrowUp'] == 1) {
-        playerY -= (1 + (a))
+        playerY -= pvy
         if (c != 1) {
             a = 0
         }
         c = 1
     } else if (keysPressed['ArrowDown'] == 1) {
-        playerY += (1 + (a))
+        playerY += pvy
         if (c != 2) {
             a = 0
         }
