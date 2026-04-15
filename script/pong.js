@@ -18,7 +18,7 @@ ballVX = rand(1, 9)
 ballVY = rand(1, 9)
 ballX = 0;
 ballY = 0;
-touch = 0;
+collision = 0;
 
 vwToPx(vw);
 vhToPx(vh);
@@ -165,7 +165,7 @@ function ballMove() {
 
     checkCollision(player,ball);
 
-    if (touch == 1) {
+    if (collision == 1) {
         if (directionChance == rand(0, 2)) {
             ballVY = -ballVY;
 
@@ -186,9 +186,9 @@ function checkCollision(rect1, rect2) {
         rect1.ballX + rect1.width > rect2.ballX &&
         rect1.ballY < rect2.ballY + rect2.height &&
         rect1.ballY + rect1.height > rect2.ballY) {
-        touch = 1
+        collision = 1
     } else {
-        touch = 0
+        collision = 0
     }
 }
 
