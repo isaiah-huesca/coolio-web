@@ -2,8 +2,7 @@ const keysPressed = {};
 const ball = document.querySelector(".ball")
 const bot = 0 // undef
 const player = document.querySelector(".player")
-player.getBoundingClientRect();
-const bl = ball.getBoundingClientRect();
+
 const ptb = player.offsetTop;
 
 vw = 1
@@ -165,6 +164,10 @@ function ballMove() {
     checkCollision(player,ball);
 
     if (touch == 1) {
+        if (d == rand(0, 2)) {
+            vy = -vy;
+
+        }
         vx = -vx
     }
 
@@ -175,6 +178,8 @@ function ballMove() {
 }
 
 function checkCollision(rect1, rect2) {
+    rect1 = rect1.getBoundingClientRect();
+    rect2 = rect2.getBoundingClientRect();
     if (rect1.x < rect2.x + rect2.width &&
         rect1.x + rect1.width > rect2.x &&
         rect1.y < rect2.y + rect2.height &&
