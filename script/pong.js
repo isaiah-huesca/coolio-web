@@ -14,7 +14,7 @@ a = 0
 c = 0
 d = 1
 timeTransition = 0
-pvx =vx = Math.floor((Math.random() * 5) + 6);
+pvx = Math.floor((Math.random() * 5) + 6);
 vx = Math.floor((Math.random() * 5) + 5);
 vy = Math.floor((Math.random() * 5) + 1);
 x = 0;
@@ -26,7 +26,7 @@ vhToPx(vh);
 
 setInterval(vwToPx, 50000);
 GAME;
-setInterval(GAME, 500);
+    requestAnimationFrame(GAME);
 setInterval(console.clear, 30000);
 
 
