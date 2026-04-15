@@ -31,6 +31,7 @@ setInterval(console.clear, 30000);
 
 document.addEventListener('keydown', (event) => {
     // Use event.code to track physical keys consistently
+    if (!event.repeat) { // Ignore repeated keydown events when key is held down
         if (event.code == 'ArrowUp' || event.code == 'ArrowDown') {
             keysPressed['ArrowUp'] = false;
             keysPressed['ArrowDown'] = false;
@@ -43,6 +44,7 @@ document.addEventListener('keydown', (event) => {
             c = 0
         }
         console.log(keysPressed)
+    }
 });
 document.addEventListener('keyup', (event) => {
     // Use event.code to track physical keys consistently
