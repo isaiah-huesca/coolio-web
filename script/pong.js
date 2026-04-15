@@ -2,8 +2,8 @@ const keysPressed = {};
 const ball = document.querySelector(".ball")
 const bot = 0 // undef
 const player = document.querySelector(".player")
-const pSz = player.getBoundingClientRect();
-const ballsz = ball.getBoundingClientRect();
+const plr = player.getBoundingClientRect();
+const bl = ball.getBoundingClientRect();
 const ptb = player.offsetTop;
 
 vw = 1
@@ -14,9 +14,9 @@ a = 0
 c = 0
 d = 1
 timeTransition = 0
-pvx = rand(5,10)
-vx = rand(1,10)
-vy = rand(1,10)
+pvx = rand(5, 10)
+vx = rand(1, 10)
+vy = rand(1, 10)
 x = 0;
 y = 0;
 touch = 0;
@@ -26,7 +26,7 @@ vhToPx(vh);
 
 setInterval(vwToPx, 50000);
 GAME;
-    requestAnimationFrame(GAME);
+requestAnimationFrame(GAME);
 setInterval(console.clear, 30000);
 
 
@@ -49,18 +49,18 @@ document.addEventListener('keydown', (event) => {
 });
 document.addEventListener('keyup', (event) => {
     // Use event.code to track physical keys consistently
-        if (event.code == 'ArrowUp' || event.code == 'ArrowDown') {
-            keysPressed['ArrowUp'] = false;
-            keysPressed['ArrowDown'] = false;
-            keysPressed['Space'] = false;
-            keysPressed[event.code] = true;
-        } else if (event.code == 'Space') {
-            keysPressed['ArrowUp'] = false;
-            keysPressed['ArrowDown'] = false;
-            keysPressed[event.code] = true;
-            c = 0
-        }
-        console.log(keysPressed)
+    if (event.code == 'ArrowUp' || event.code == 'ArrowDown') {
+        keysPressed['ArrowUp'] = false;
+        keysPressed['ArrowDown'] = false;
+        keysPressed['Space'] = false;
+        keysPressed[event.code] = true;
+    } else if (event.code == 'Space') {
+        keysPressed['ArrowUp'] = false;
+        keysPressed['ArrowDown'] = false;
+        keysPressed[event.code] = true;
+        c = 0
+    }
+    console.log(keysPressed)
 });
 
 function GAME() {
@@ -79,7 +79,7 @@ function vhToPx(vh) {
 }
 
 function playerControll() {
-    a+= .5
+    a += .5
     if (keysPressed['ArrowUp'] == 1) {
         playerY -= (1 + (a))
         if (c != 1) {
@@ -99,8 +99,7 @@ function playerControll() {
     if (ptb < playerY || -ptb > playerY) {
         if (ptb < playerY) {
             playerY = ptb
-        }
-        else if (-ptb > playerY) {
+        } else if (-ptb > playerY) {
             playerY = -ptb
         }
         a = 0
@@ -121,22 +120,35 @@ function updVs() {
 function ballMove() {
     const blr = ball.offsetLeft;
     const btb = ball.offsetTop;
+    d = rand(0, 2);
 
 
     if (x > (blr)) {
         vx = -vx;
-    }
-    else if (x < (-blr)) {
+        if (d == rand(0, 2)) {
+            if (rand(0, 2) == rand(0, 2)) {
+                vy = rand(1, 10)
+            }
+            vy = -vy;
+        }
+    } else if (x < (-blr)) {
         vx = -vx;
+        if (d == rand(0, 2)) {
+            if (rand(0, 2) == rand(0, 2)) {
+                vy = rand(1, 10)
+            }
+            vy = -vy;
+
+        }
     }
 
     if (y > (btb)) {
         vy = -vy;
-    }
-    else if (y < (-btb)) {
+    } else if (y < (-btb)) {
         vy = -vy;
     }
-    checkCollision(player, ball);
+    touch = checkCollision(bl, plr);
+
     if (touch == 1) {
         vx = -vx
     }
@@ -161,8 +173,7 @@ function clamp(num, min, max) {
 }
 
 function rand(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-
