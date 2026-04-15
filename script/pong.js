@@ -143,21 +143,23 @@ function ballMove() {
     }
 
     if (y > (btb)) {
-        vy = -vy;
         if (rand(0, 2) == rand(0, 2)) {
                 vx = rand(1, 10)
             }
         if (d == rand(0, 2)) {
             vx = -vx;
         }
+        vy = -vy;
+
     } else if (y < (-btb)) {
-        vy = -vy;
         if (rand(0, 2) == rand(0, 2)) {
                 vx = rand(1, 10)
             }
         if (d == rand(0, 2)) {
             vx = -vx;
         }
+        vy = -vy;
+
     }
     touch = checkCollision(bl, plr);
 
