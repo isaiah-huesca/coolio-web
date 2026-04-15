@@ -8,7 +8,7 @@ const ptb = player.offsetTop;
 vw = 1
 vh = 1
 playerY = 1
-playerX = 
+playerX = (45 * window.innerWidth) / 100
 a = 0
 c = 0
 d = 1
@@ -111,7 +111,7 @@ function playerControll() {
 
 function updVs() {
     timeTransition = a / 2
-    player.style.transform = `translate(0px, ${playerY}px)`
+    player.style.transform = `translate(${playerX}px, ${playerY}px)`
     ball.style.transform = `translate(${x}px, ${y}px)`
 
 }
