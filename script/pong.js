@@ -66,7 +66,6 @@ document.addEventListener('keyup', (event) => {
 function GAME() {
     playerControll();
     updVs();
-    isColliding();
     ballMove();
     requestAnimationFrame(GAME)
 }
@@ -137,6 +136,7 @@ function ballMove() {
     else if (y < (-btb)) {
         vy = -vy;
     }
+    checkCollision(player, ball);
     if (touch == 1) {
         vx = -vx
     }
@@ -147,13 +147,13 @@ function ballMove() {
     console.log(blr, btb, x, y, vx, vy, playerY)
 }
 
-function isColliding() {
-    if ((playerY + 45 > y && playerY - 45 < y) && (playerX + 5 > x && playerX - 5 < x)) {
-        touch = 1
-    }
-    else {
-        touch = 0
-    }
+function checkCollision(rect1, rect2) {
+    return (
+        rect1.x < rect2.x + rect2.width &&
+        rect1.x + rect1.width > rect2.x &&
+        rect1.y < rect2.y + rect2.height &&
+        rect1.y + rect1.height > rect2.y
+    );
 }
 
 function clamp(num, min, max) {
