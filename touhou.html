@@ -2,201 +2,247 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Gensokyo JS: Midnight Phantasm</title>
+    <title>Midnight Phantasm: The JS Incident</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@1,600&family=Share+Tech+Mono&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+        body { background: #050505; color: #fff; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; font-family: 'Share Tech Mono', monospace; }
+        #game-wrapper { position: relative; border: 4px solid #221133; box-shadow: 0 0 30px #441166; display: flex; }
+        canvas { background: #000; display: block; image-rendering: pixelated; }
 
-        body { background: #000; color: #fff; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; font-family: 'Share Tech Mono', monospace; }
-        #game-container { position: relative; border: 2px solid #442244; box-shadow: 0 0 50px #331133; }
-        canvas { display: block; background: #000; }
+        /* UI Sidebar */
+        #sidebar { width: 220px; background: #0a000a; border-left: 2px solid #221133; padding: 20px; display: flex; flex-direction: column; gap: 20px; }
+        .stat-box { border-bottom: 1px solid #331133; padding-bottom: 10px; }
+        .label { color: #885588; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+        .value { font-size: 24px; color: #eee; text-shadow: 0 0 10px #ff00ff44; }
 
-        /* UI Styling */
-        #hud { position: absolute; top: 0; right: -240px; width: 220px; height: 100%; background: linear-gradient(180deg, #1a001a 0%, #000 100%); border-left: 2px solid #442244; padding: 20px; box-sizing: border-box; }
-        .stat-group { margin-bottom: 25px; }
-        .label { color: #8a668a; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
-        .value { color: #fff; font-size: 22px; text-shadow: 0 0 10px #ff00ff66; }
-        .bar { width: 100%; height: 6px; background: #202; border: 1px solid #404; margin-top: 5px; position: relative; }
-        #boss-hp-fill { width: 100%; height: 100%; background: linear-gradient(90deg, #ff0055, #ffaa00); transition: width 0.3s; }
+        /* Boss Health */
+        #boss-ui { position: absolute; top: 10px; left: 10px; width: 480px; transition: opacity 0.5s; }
+        .hp-bar { width: 100%; height: 4px; background: rgba(255,0,0,0.2); border: 1px solid #440000; }
+        #hp-fill { width: 100%; height: 100%; background: #ff0044; box-shadow: 0 0 10px #ff0044; }
 
         /* Spell Card Banner */
-        #spell-banner { position: absolute; top: 80px; left: 0; width: 100%; text-align: right; padding-right: 20px; font-family: 'Crimson Text', serif; font-size: 24px; font-style: italic; color: #ff0055; text-shadow: 2px 2px #000; opacity: 0; transition: opacity 1s; pointer-events: none; }
+        #spell-announcement { position: absolute; right: 10px; top: 30px; color: #ff0066; font-style: italic; font-size: 18px; opacity: 0; transition: 1s; text-shadow: 2px 2px #000; }
 
-        #overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.85); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10; }
-        h1 { font-family: 'Crimson Text', serif; font-size: 48px; margin: 0; color: #ff0055; text-shadow: 0 0 20px #ff0055; }
-        button { background: none; border: 1px solid #ff0055; color: #ff0055; padding: 10px 30px; font-family: inherit; font-size: 20px; cursor: pointer; transition: 0.3s; margin-top: 20px; }
-        button:hover { background: #ff0055; color: #000; box-shadow: 0 0 20px #ff0055; }
+        /* Overlays */
+        #overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.8); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 10; text-align: center; }
+        h1 { color: #ff0066; font-size: 40px; margin: 0; text-shadow: 0 0 20px #ff0066; }
+        button { background: none; border: 2px solid #ff0066; color: #ff0066; padding: 12px 30px; font-family: inherit; font-size: 20px; cursor: pointer; transition: 0.3s; margin-top: 20px; }
+        button:hover { background: #ff0066; color: #000; }
         .hidden { display: none !important; }
     </style>
 </head>
 <body>
 
-<div id="game-container">
-    <canvas id="gameCanvas" width="500" height="700"></canvas>
-    <div id="spell-banner">Spell Card: "Thousand Cherry Blossoms"</div>
+<div id="game-wrapper">
+    <div id="boss-ui" style="opacity:0">
+        <div class="label" id="boss-name">Ancient Phantasm</div>
+        <div class="hp-bar"><div id="hp-fill"></div></div>
+    </div>
+    <div id="spell-announcement">Spell Card: "Neon Butterfly Dream"</div>
 
-    <div id="hud">
-        <div class="stat-group">
-            <div class="label">High Score</div>
-            <div class="value">000,999,999</div>
-        </div>
-        <div class="stat-group">
+    <canvas id="gameCanvas" width="500" height="750"></canvas>
+
+    <div id="sidebar">
+        <div class="stat-box">
             <div class="label">Score</div>
             <div id="score" class="value">0</div>
         </div>
-        <div class="stat-group">
-            <div class="label">Lives</div>
-            <div id="lives" class="value" style="color: #ff69b4;">❤❤❤</div>
+        <div class="stat-box">
+            <div class="label">Player</div>
+            <div id="lives" class="value" style="color:#ff69b4">❤❤❤</div>
         </div>
-        <div class="stat-group">
+        <div class="stat-box">
             <div class="label">Graze</div>
-            <div id="graze" class="value" style="color: #00ffff;">0</div>
+            <div id="graze" class="value" style="color:#00ffff">0</div>
         </div>
-        <div class="stat-group">
+        <div class="stat-box">
             <div class="label">Power</div>
-            <div id="power" class="value" style="color: #ffaa00;">0.00 / 4.00</div>
+            <div id="power" class="value" style="color:#ffaa00">0.00</div>
         </div>
-        <div id="boss-ui" class="hidden">
-            <div class="label">Boss Vitality</div>
-            <div class="bar"><div id="boss-hp-fill"></div></div>
+        <div style="margin-top:auto; font-size:10px; color:#444">
+            Z: SHOOT | X: BOMB<br>SHIFT: FOCUS | ARROWS: MOVE
         </div>
     </div>
 
     <div id="overlay">
-        <h1>MIDNIGHT PHANTASM</h1>
-        <p style="color: #888">Arrows to Move | Z to Shoot | Shift for Focus</p>
-        <button onclick="initGame()">Enter the Dream</button>
+        <h1 id="m-title">MIDNIGHT PHANTASM</h1>
+        <p id="m-sub">The stars are restless tonight.</p>
+        <button onclick="startGame()">BEGIN INCIDENT</button>
     </div>
 </div>
 
 <script>
+/** @type {HTMLCanvasElement} */
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
-// --- GAME OBJECTS ---
-let state = 'MENU';
+// --- CONSTANTS & STATE ---
+let gameState = 'MENU';
 let frames = 0;
 let score = 0;
 let graze = 0;
 let lives = 3;
 let power = 0;
+let shake = 0;
 
-const player = { x: 250, y: 600, r: 2, speed: 5, invuln: 0, bullets: [] };
-const boss = { x: 250, y: -100, hp: 5000, max: 5000, phase: 0, active: false, t: 0 };
-const enemyBullets = [];
-const items = [];
+const player = { x: 250, y: 650, r: 2, speed: 5, invuln: 0, bullets: [] };
+const boss = { x: 250, y: -100, hp: 5000, max: 5000, active: false, phase: 1, t: 0 };
+const enemyPool = [];
+const bulletPool = [];
+const itemPool = [];
 const particles = [];
-const stars = Array(50).fill(0).map(() => ({ x: Math.random()*500, y: Math.random()*700, s: Math.random()*2+1 }));
-
 const keys = {};
+
+// Background particles
+const stars = Array(60).fill(0).map(() => ({ x: Math.random()*500, y: Math.random()*750, s: Math.random()*3+1 }));
+
+// --- INPUTS ---
 window.onkeydown = (e) => keys[e.key.toLowerCase()] = true;
 window.onkeyup = (e) => keys[e.key.toLowerCase()] = false;
 
-// --- UTILS ---
-function spawnBullet(x, y, angle, speed, color, radius=4) {
-    enemyBullets.push({ x, y, vx: Math.cos(angle)*speed, vy: Math.sin(angle)*speed, color, r: radius, grazed: false });
+// --- UTILITIES ---
+function spawnBullet(x, y, angle, speed, color, radius = 4) {
+    bulletPool.push({ x, y, vx: Math.cos(angle)*speed, vy: Math.sin(angle)*speed, color, r: radius, grazed: false });
 }
 
-function createExplosion(x, y, color, count=10) {
-    for(let i=0; i<count; i++) {
-        particles.push({ x, y, vx: (Math.random()-0.5)*10, vy: (Math.random()-0.5)*10, life: 30, color });
+function spawnItem(x, y, type) {
+    itemPool.push({ x, y, type, vy: 1.5 });
+}
+
+function createExplosion(x, y, color, amount = 15) {
+    for(let i=0; i<amount; i++) {
+        particles.push({ x, y, vx: (Math.random()-0.5)*8, vy: (Math.random()-0.5)*8, life: 25, color });
     }
 }
 
-// --- LOGIC ---
+// --- GAME LOGIC ---
 function update() {
-    if (state !== 'PLAYING') return;
+    if (gameState !== 'PLAYING') return;
     frames++;
+    if (shake > 0) shake--;
     if (player.invuln > 0) player.invuln--;
 
-    // 1. Background Scroll
-    stars.forEach(s => {
-        s.y += s.s;
-        if (s.y > 700) { s.y = 0; s.x = Math.random()*500; }
-    });
+    // 1. Stage Director
+    if (frames < 1500) { // Wave Phase
+        if (frames % 45 === 0) {
+            enemyPool.push({ x: Math.random()*400+50, y: -20, hp: 15, t: 0 });
+        }
+    } else if (frames === 1600) { // Boss Entrance
+        boss.active = true;
+        document.getElementById('boss-ui').style.opacity = 1;
+    }
 
-    // 2. Player Movement (Touhou Focus Mechanic)
+    // 2. Player Movement
     const isFocus = keys['shift'];
-    const curSpeed = isFocus ? player.speed / 2.5 : player.speed;
+    const curSpeed = isFocus ? player.speed * 0.4 : player.speed;
     if (keys['arrowup'] && player.y > 20) player.y -= curSpeed;
-    if (keys['arrowdown'] && player.y < 680) player.y += curSpeed;
+    if (keys['arrowdown'] && player.y < 730) player.y += curSpeed;
     if (keys['arrowleft'] && player.x > 20) player.x -= curSpeed;
     if (keys['arrowright'] && player.x < 480) player.x += curSpeed;
 
-    // 3. Shooting
+    // 3. Player Shooting
     if (keys['z'] && frames % 4 === 0) {
-        player.bullets.push({ x: player.x, y: player.y - 15, vx: 0 });
+        player.bullets.push({ x: player.x, y: player.y-20, vx: 0 });
         if (power >= 1) {
-            player.bullets.push({ x: player.x - 10, y: player.y, vx: -0.5 });
-            player.bullets.push({ x: player.x + 10, y: player.y, vx: 0.5 });
+            player.bullets.push({ x: player.x-15, y: player.y-5, vx: -0.4 });
+            player.bullets.push({ x: player.x+15, y: player.y-5, vx: 0.4 });
+        }
+        if (power >= 2) {
+            player.bullets.push({ x: player.x-25, y: player.y+5, vx: -0.8 });
+            player.bullets.push({ x: player.x+25, y: player.y+5, vx: 0.8 });
         }
     }
 
-    // 4. Boss Sequence
-    if (frames === 200) {
-        boss.active = true;
-        document.getElementById('boss-ui').classList.remove('hidden');
-    }
+    // 4. Enemy & Boss Logic
+    enemyPool.forEach((en, i) => {
+        en.y += 1.2;
+        en.t++;
+        if (en.t % 60 === 0) spawnBullet(en.x, en.y, Math.PI/2, 3, '#ff00ff');
+        if (en.y > 780) enemyPool.splice(i, 1);
 
-    if (boss.active) {
-        if (boss.y < 150) boss.y += 2;
-        boss.t++;
-        boss.x = 250 + Math.sin(boss.t * 0.01) * 100;
-
-        // Phase Transitions
-        if (boss.hp > 2500) {
-            // Phase 1: Petal Rain
-            if (frames % 5 === 0) {
-                let angle = Math.sin(frames * 0.02) * Math.PI * 2;
-                spawnBullet(boss.x, boss.y, angle, 3, '#ff00aa');
-                spawnBullet(boss.x, boss.y, angle + Math.PI, 3, '#ff00aa');
-            }
-        } else {
-            // Phase 2: Spell Card "Neon Web"
-            if (boss.phase === 0) {
-                boss.phase = 1;
-                document.getElementById('spell-banner').style.opacity = 1;
-                enemyBullets.length = 0; // Clear screen for spell
-            }
-            if (frames % 15 === 0) {
-                for(let i=0; i<12; i++) {
-                    spawnBullet(boss.x, boss.y, (i*Math.PI*2/12) + (frames*0.05), 2, '#00ffff', 5);
+        player.bullets.forEach((pb, pi) => {
+            if (Math.hypot(pb.x - en.x, pb.y - en.y) < 25) {
+                en.hp -= 5;
+                player.bullets.splice(pi, 1);
+                if (en.hp <= 0) {
+                    score += 500;
+                    spawnItem(en.x, en.y, Math.random() > 0.7 ? 'P' : 'S');
+                    createExplosion(en.x, en.y, '#f0f');
+                    enemyPool.splice(i, 1);
                 }
             }
+        });
+    });
+
+    if (boss.active) {
+        if (boss.y < 180) boss.y += 1.5;
+        boss.t++;
+        boss.x = 250 + Math.sin(boss.t * 0.015) * 120;
+
+        // Phase 1: Spiral
+        if (boss.hp > 2500) {
+            if (frames % 4 === 0) {
+                let a = frames * 0.12;
+                spawnBullet(boss.x, boss.y, a, 2.5, '#00ffff');
+                spawnBullet(boss.x, boss.y, -a, 2.5, '#00ffff');
+            }
+        } else { // Phase 2: Spell Card
+            if (boss.phase === 1) {
+                boss.phase = 2;
+                bulletPool.length = 0;
+                document.getElementById('spell-announcement').style.opacity = 1;
+            }
+            if (frames % 20 === 0) {
+                for(let i=0; i<16; i++) {
+                    spawnBullet(boss.x, boss.y, (i*Math.PI*2/16) + (frames*0.01), 2, '#ff0066', 6);
+                }
+            }
+            if (frames % 60 === 0) { // Aimed shots
+                let angle = Math.atan2(player.y - boss.y, player.x - boss.x);
+                for(let j=-0.3; j<=0.3; j+=0.15) spawnBullet(boss.x, boss.y, angle+j, 4, '#ffffff', 3);
+            }
         }
+
+        player.bullets.forEach((pb, pi) => {
+            if (Math.hypot(pb.x - boss.x, pb.y - boss.y) < 45) {
+                boss.hp -= (power + 1) * 1.5;
+                player.bullets.splice(pi, 1);
+                score += 10;
+            }
+        });
+        if (boss.hp <= 0) victory();
     }
 
-    // 5. Collision & Graze
-    enemyBullets.forEach((b, i) => {
+    // 5. Collisions (Bullet vs Player)
+    bulletPool.forEach((b, i) => {
         b.x += b.vx; b.y += b.vy;
+        const d = Math.hypot(b.x - player.x, b.y - player.y);
 
-        const dist = Math.hypot(b.x - player.x, b.y - player.y);
-
-        // Graze logic (Distance < 20 but > player radius)
-        if (!b.grazed && dist < 25 && dist > player.r + 2) {
+        // Graze
+        if (!b.grazed && d < 25 && d > player.r + 5) {
             b.grazed = true;
             graze++;
             score += 100;
         }
-
-        // Hit logic
-        if (player.invuln <= 0 && dist < player.r + b.r/2) {
-            lives--;
-            player.invuln = 120;
-            enemyBullets.length = 0;
-            createExplosion(player.x, player.y, '#fff', 30);
-            if (lives < 0) state = 'MENU';
+        // Hit
+        if (player.invuln <= 0 && d < player.r + b.r/2) {
+            pichuun();
         }
+        if (b.y < -50 || b.y > 800 || b.x < -50 || b.x > 550) bulletPool.splice(i, 1);
+    });
 
-        if (b.y < -50 || b.y > 750 || b.x < -50 || b.x > 550) enemyBullets.splice(i, 1);
+    // 6. Items & Particles
+    itemPool.forEach((it, i) => {
+        it.y += it.vy;
+        if (Math.hypot(it.x - player.x, it.y - player.y) < 30) {
+            if (it.type === 'P') power = Math.min(4, power + 0.05);
+            else score += 1000;
+            itemPool.splice(i, 1);
+        }
     });
 
     player.bullets.forEach((b, i) => {
         b.y -= 12; b.x += b.vx;
-        if (boss.active && Math.hypot(b.x - boss.x, b.y - boss.y) < 40) {
-            boss.hp -= 5;
-            score += 10;
-            player.bullets.splice(i, 1);
-        }
         if (b.y < -20) player.bullets.splice(i, 1);
     });
 
@@ -209,82 +255,108 @@ function update() {
 }
 
 function updateUI() {
-    document.getElementById('score').innerText = score.toLocaleString().padStart(9, '0');
+    document.getElementById('score').innerText = Math.floor(score).toLocaleString().padStart(9, '0');
     document.getElementById('lives').innerText = "❤".repeat(Math.max(0, lives));
     document.getElementById('graze').innerText = graze;
-    document.getElementById('power').innerText = power.toFixed(2) + " / 4.00";
-    document.getElementById('boss-hp-fill').style.width = (boss.hp/boss.max*100) + "%";
+    document.getElementById('power').innerText = power.toFixed(2);
+    document.getElementById('hp-fill').style.width = (boss.hp / boss.max * 100) + "%";
+}
+
+function pichuun() {
+    lives--;
+    shake = 20;
+    player.invuln = 120;
+    createExplosion(player.x, player.y, '#fff', 40);
+    bulletPool.length = 0;
+    if (lives < 0) {
+        gameState = 'MENU';
+        document.getElementById('overlay').classList.remove('hidden');
+        document.getElementById('m-title').innerText = "GAME OVER";
+    }
+}
+
+function victory() {
+    gameState = 'MENU';
+    document.getElementById('overlay').classList.remove('hidden');
+    document.getElementById('m-title').innerText = "ALL CLEAR";
+    document.getElementById('m-sub').innerText = "Score: " + score;
 }
 
 function draw() {
-    // Clear with slight trail effect
-    ctx.fillStyle = 'rgba(0,0,0,0.2)';
-    ctx.fillRect(0, 0, 500, 700);
+    ctx.save();
+    if (shake > 0) ctx.translate(Math.random()*shake-shake/2, Math.random()*shake-shake/2);
 
-    // Stars
+    // Clear with motion blur
+    ctx.fillStyle = 'rgba(0,0,0,0.25)';
+    ctx.fillRect(0, 0, 500, 750);
+
+    // Background Stars
     ctx.fillStyle = '#fff';
-    stars.forEach(s => ctx.fillRect(s.x, s.y, s.s/2, s.s/2));
+    stars.forEach(s => {
+        s.y += s.s; if (s.y > 750) s.y = 0;
+        ctx.fillRect(s.x, s.y, s.s/2, s.s/2);
+    });
 
-    // Boss Glow
+    // Draw Boss
     if (boss.active) {
-        ctx.shadowBlur = 20;
-        ctx.shadowColor = boss.hp > 2500 ? '#ff00aa' : '#00ffff';
+        ctx.shadowBlur = 15; ctx.shadowColor = boss.phase === 1 ? '#0ff' : '#f06';
         ctx.fillStyle = '#fff';
-        ctx.beginPath(); ctx.arc(boss.x, boss.y, 30, 0, Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.arc(boss.x, boss.y, 35, 0, Math.PI*2); ctx.fill();
         ctx.shadowBlur = 0;
     }
 
-    // Player
+    // Draw Player
     if (player.invuln % 4 < 2) {
-        // Character Body
         ctx.fillStyle = '#f0f';
-        ctx.fillRect(player.x-12, player.y-18, 24, 36);
-
-        // Focus Hitbox Dot (Stylized)
-        if (keys['shift']) {
-            ctx.shadowBlur = 10;
-            ctx.shadowColor = '#fff';
-            ctx.fillStyle = '#fff';
-            ctx.beginPath(); ctx.arc(player.x, player.y, 4, 0, Math.PI*2); ctx.fill();
-            ctx.shadowBlur = 0;
+        ctx.fillRect(player.x-10, player.y-15, 20, 30);
+        if (keys['shift']) { // Hitbox indicator
+            ctx.fillStyle = '#fff'; ctx.beginPath();
+            ctx.arc(player.x, player.y, 4, 0, Math.PI*2); ctx.fill();
+            ctx.strokeStyle = '#f00'; ctx.stroke();
         }
     }
 
-    // Bullets (Neon Style)
-    ctx.lineWidth = 2;
-    enemyBullets.forEach(b => {
-        ctx.shadowBlur = 8;
-        ctx.shadowColor = b.color;
-        ctx.fillStyle = '#fff';
-        ctx.beginPath(); ctx.arc(b.x, b.y, b.r, 0, Math.PI*2); ctx.fill();
-        ctx.strokeStyle = b.color;
-        ctx.stroke();
+    // Draw Items
+    itemPool.forEach(it => {
+        ctx.fillStyle = it.type === 'P' ? '#f44' : '#44f';
+        ctx.fillRect(it.x-8, it.y-8, 16, 16);
+        ctx.fillStyle = '#fff'; ctx.font = "10px Arial";
+        ctx.fillText(it.type, it.x-3, it.y+4);
+    });
+
+    // Draw Bullets (Stylized)
+    player.bullets.forEach(b => {
+        ctx.fillStyle = '#0ff'; ctx.fillRect(b.x-2, b.y, 4, 15);
+    });
+
+    bulletPool.forEach(b => {
+        ctx.shadowBlur = 5; ctx.shadowColor = b.color;
+        ctx.fillStyle = '#fff'; ctx.beginPath();
+        ctx.arc(b.x, b.y, b.r, 0, Math.PI*2); ctx.fill();
+        ctx.strokeStyle = b.color; ctx.lineWidth = 2; ctx.stroke();
     });
     ctx.shadowBlur = 0;
 
-    // Player Shots
-    ctx.fillStyle = '#0ff';
-    player.bullets.forEach(b => ctx.fillRect(b.x-2, b.y, 4, 15));
-
     particles.forEach(p => {
-        ctx.globalAlpha = p.life/30;
-        ctx.fillStyle = p.color;
+        ctx.globalAlpha = p.life/25; ctx.fillStyle = p.color;
         ctx.fillRect(p.x, p.y, 3, 3);
     });
     ctx.globalAlpha = 1;
 
+    ctx.restore();
     update();
     requestAnimationFrame(draw);
 }
 
-function initGame() {
-    score = 0; lives = 3; frames = 0; graze = 0;
-    boss.hp = boss.max; boss.active = false; boss.y = -100; boss.phase = 0;
-    player.x = 250; player.y = 600;
-    enemyBullets.length = 0;
+function startGame() {
+    score = 0; lives = 3; power = 0; graze = 0; frames = 0;
+    boss.hp = boss.max; boss.active = false; boss.y = -100; boss.phase = 1;
+    player.x = 250; player.y = 650;
+    enemyPool.length = 0; bulletPool.length = 0; itemPool.length = 0;
     document.getElementById('overlay').classList.add('hidden');
-    document.getElementById('spell-banner').style.opacity = 0;
-    state = 'PLAYING';
+    document.getElementById('boss-ui').style.opacity = 0;
+    document.getElementById('spell-announcement').style.opacity = 0;
+    gameState = 'PLAYING';
 }
 
 draw();
